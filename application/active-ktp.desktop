@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=KTp
+GenericName=KDE Telepathy
+Comment=Instant Messenger for Plasma Active
+
+Exec=active-ktp -graphicssystem raster %u
+Terminal=false
+Icon=active-ktp
+Type=Application
+Categories=Qt;KDE;Network;ActiveCore;
+X-KDE-PluginInfo-Website=
+MimeType=text/html;text/xml;application/xhtml+xml;
