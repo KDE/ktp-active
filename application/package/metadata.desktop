@@ -16,3 +16,6 @@ X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 X-Plasma-MainScript=ui/main.qml
+
+ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
