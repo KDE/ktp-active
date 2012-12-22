@@ -7,3 +7,13 @@ cd build
 cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` ..
 make
 sudo make install
+
+
+Note: 
+Im using kdeclarativeview and kdeclarativemainwindow borrowed from
+Plasma Active from 
+https://projects.kde.org/projects/extragear/base/plasma-mobile/repository/revisions/master/show/applications/common
+
+I added it to the root directory so if you dont have plasma active you might 
+want to uncommenct #add_subdirectory(common) from root's folder CMakeLists.txt
+in order to build it.

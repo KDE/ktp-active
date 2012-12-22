@@ -12,4 +12,5 @@ macro_log_feature(
     )
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
+#add_subdirectory(common)
 add_subdirectory(application)

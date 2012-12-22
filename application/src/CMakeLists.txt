@@ -1,13 +1,13 @@
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} ../../common)
+include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
-set(active-ktp_SRCS
+set(ktp-active_SRCS
     main.cpp
     activeIM.cpp
 )
 
-kde4_add_executable(active-ktp ${active-ktp_SRCS})
+kde4_add_executable(ktp-active ${ktp-active_SRCS})
 
-target_link_libraries(active-ktp
+target_link_libraries(ktp-active
     ${QT_QTDECLARATIVE_LIBRARY}
     ${QT_QTOPENGL_LIBRARY}
     ${QT_QTSCRIPT_LIBRARY}
@@ -18,4 +18,4 @@ target_link_libraries(active-ktp
     activeapp
 )
 
-install(TARGETS active-ktp ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install(TARGETS ktp-active ${INSTALL_TARGETS_DEFAULT_ARGS} )

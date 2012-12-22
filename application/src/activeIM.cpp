@@ -43,7 +43,7 @@ ActiveIM::ActiveIM()
 {
     //KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    declarativeView()->setPackageName("org.kde.active.ktp");
+    declarativeView()->setPackageName("org.kde.ktp.active");
    
 }
 

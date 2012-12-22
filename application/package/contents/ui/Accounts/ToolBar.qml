@@ -12,14 +12,16 @@ Item {
     anchors.right: parent.right
     height: childrenRect.height + 20
 
+    state: "DEFAULT"
+
+    signal closeSignal;
+
     // Debug rectangle
 //    Rectangle {
 //        color: "orange"
 //        opacity: 0.3
 //        anchors.fill: parent
 //    }
-
-    property bool accountSelected: false
 
     PlasmaComponents.ToolBar {
         id: toolbarMenu
@@ -30,51 +32,93 @@ Item {
             id: toolbar
             spacing: 10
             PlasmaComponents.ToolButton {
+                id: homeButton
                 iconSource: "go-home"
                 flat: false
-                height: addButton.height
-                width: addButton.height
+                height: addButton.height * 1.5
+                width: addButton.height * 1.5
+                onClicked: { rootToolbar.state = "DEFAULT" }
+                anchors.verticalCenter: toolbar.verticalCenter
             }
 
             PlasmaComponents.ToolButton {
                 id: addButton
                 text: i18n("Add account")
                 flat: false
-                onClicked: { accountSelected = !accountSelected }
+                onClicked: { rootToolbar.state = "FORM" }
+                anchors.verticalCenter: toolbar.verticalCenter
             }
 
             // Hidden buttons
             PlasmaComponents.ToolButton {
                 id: editButton
-                visible: accountSelected
                 text: i18n("Edit account")
                 flat: false
+                anchors.verticalCenter: toolbar.verticalCenter
             }
             PlasmaComponents.ToolButton {
                 id: deleteButton
-                visible: accountSelected
                 text: i18n("Delete account")
                 flat: false
+                anchors.verticalCenter: toolbar.verticalCenter
             }
             PlasmaComponents.ToolButton {
                 id: onoffButton
-                visible: accountSelected
-                height: addButton.height
-                width: addButton.height
+                height: addButton.height * 1.5
+                width: addButton.height * 1.5
                 iconSource: checked ? "user-online" : "user-offline"
                 flat: false
                 checkable: true
+                anchors.verticalCenter: toolbar.verticalCenter
+            }
+
+            PlasmaComponents.ToolButton {
+                id: saveButton
+                text: i18n("Save")
+                flat: false
+                anchors.verticalCenter: toolbar.verticalCenter
+                anchors.right: cancelButton.left
+                anchors.rightMargin: 10
             }
 
             PlasmaComponents.ToolButton {
                 // Prints warning but prevents disappering when changing visibility of previous elements
                 anchors.right: toolbar.right
                 id: cancelButton
-                text: i18n("Cancel")
+                text: i18n("Close")
                 flat: false
+                anchors.verticalCenter: toolbar.verticalCenter
+                onClicked: closeSignal();
             }
         }
     }
+
+    states : [
+        State {
+            name: "DEFAULT"
+            PropertyChanges { target: addButton; visible: true }
+            PropertyChanges { target: editButton; visible: false }
+            PropertyChanges { target: deleteButton; visible: false }
+            PropertyChanges { target: onoffButton; visible: false }
+            PropertyChanges { target: saveButton; visible: false }
+        },
+        State {
+            name: "FORM"
+            PropertyChanges { target: addButton; visible: false }
+            PropertyChanges { target: editButton; visible: false }
+            PropertyChanges { target: deleteButton; visible: false }
+            PropertyChanges { target: onoffButton; visible: false }
+            PropertyChanges { target: saveButton; visible: true }
+        },
+        State {
+            name: "EDIT"
+            PropertyChanges { target: addButton; visible: true }
+            PropertyChanges { target: editButton; visible: true }
+            PropertyChanges { target: deleteButton; visible: true }
+            PropertyChanges { target: onoffButton; visible: true }
+            PropertyChanges { target: saveButton; visible: false }
+        }
+    ]
 
 
 

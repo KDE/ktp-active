@@ -2,13 +2,14 @@ import QtQuick 1.1
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
+    id: rootAccountView
     width: parent
     height: parent
 
     ToolBar{
         id: toolbar
-        width: parent
-        height: 50
+        width: parent        
+        onCloseSignal: { rootItem.dialogClose() }
     }
 
     PlasmaExtras.Heading {
@@ -30,6 +31,6 @@ Item {
             leftMargin: parent.width * 0.025
             rightMargin: parent.width * 0.025
         }
+        onSelectedItem: toolbar.state = "EDIT";
     }
-
 }

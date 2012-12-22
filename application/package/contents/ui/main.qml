@@ -40,13 +40,18 @@ Image {
     property int minimumWidth: 500
     property int minimumHeight: 300
 
+    signal dialogOpen(string qmlSource);
+    signal dialogClose;
+    onDialogClose:{ dialog.visible = false; loader.source = ""; }
+    onDialogOpen: { dialog.visible = true; loader.source = qmlSource; }
+
     PlasmaCore.Theme {
         id: theme
     }
 
     PlasmaComponents.Button {
-        text: i18n("Open dialog")
-        onClicked: { dialog.visible = true; loader.source = "Accounts/AccountView.qml"; }
+        text: i18n("Open accounts")
+        onClicked: { dialogOpen("Accounts/AccountView.qml"); }
     }
 
     PlasmaCore.FrameSvgItem {
@@ -62,8 +67,4 @@ Image {
         }
         imagePath: "translucent/dialogs/background"
     }
-
-
-
-
 }

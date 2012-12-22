@@ -3,7 +3,7 @@ Name=KTp
 GenericName=KDE Telepathy
 Comment=Instant Messenger for Plasma Active
 
-Exec=active-ktp -graphicssystem raster %u
+Exec=ktp-active -graphicssystem raster %u
 Terminal=false
 Icon=active-ktp
 Type=Application

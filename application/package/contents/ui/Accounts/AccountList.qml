@@ -9,6 +9,8 @@ Item {
     width: 200
     height: 300
 
+    signal selectedItem(string name, int state);
+
     // Debug rectangle
     Rectangle {
         //color: "blue"
@@ -17,71 +19,93 @@ Item {
         //border.color: "black"
     }
 
-    Component {
-        id: entryDelegate
-        Rectangle {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            height: accountIcon.height + 10
-            border.color: "#cccccc"
-
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "#ffffff" }
-                GradientStop { position: 0.85; color: "#eeeeee" }
-                GradientStop { position: 1.0; color: "#dddddd" }
-            }
-            // Account information
-            Image {
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-                id: accountIcon
-                source: icon
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            PlasmaComponents.Label {
-                id: accountLabel
-                anchors.left: accountIcon.right
-                anchors.verticalCenter: accountIcon.verticalCenter
-                anchors.margins: 10
-                font.weight: Font.Bold
-                text: label
-            }
-            // Account status
-            Image {
-                anchors.right: parent.right
-                anchors.rightMargin: 10
-                id: statusIcon
-                source: accountStatus == 1 ? "../../images/user-online.png" : "../../images/user-offline.png"
-                anchors.verticalCenter: parent.verticalCenter
-            }
-            PlasmaComponents.Label {
-                id: statusLabel
-                anchors.right: statusIcon.left
-                anchors.verticalCenter: statusIcon.verticalCenter
-                anchors.margins: 10
-                color: "#666666"
-                text: accountStatus == 1 ? i18n("online") : i18n("offline")
-            }
-        }
-    }
-
-
     PlasmaExtras.ScrollArea {
         id: scrollArea
         anchors.fill: parent
         flickableItem: list
 
         ListView {
+            currentIndex: -1
             id: list
             model: testModel
             delegate: entryDelegate
+            focus: true
             smooth: true
-            snapMode: ListView.SnapOneItem
+            snapMode: ListView.SnapToItem
             flickableDirection: Flickable.VerticalFlick
-            spacing: 5;
+            spacing: 5
             clip: true
+
+            Component {
+                id: entryDelegate
+                Rectangle {
+                    id: signleEntry
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: accountIcon.height + 10
+                    border.color: ListView.isCurrentItem ? "#006600" : "#cccccc"
+
+                    Gradient {
+                        id: regularGradient
+                        GradientStop { position: 0.0; color: "#ffffff" }
+                        GradientStop { position: 0.85; color: "#eeeeee" }
+                        GradientStop { position: 1.0; color: "#dddddd" }
+                    }
+
+                    Gradient {
+                        id: highlightGradient
+                        GradientStop { position: 0.0; color: "#cccccc" }
+                        GradientStop { position: 0.75; color: "#eeeeee" }
+                        GradientStop { position: 1.0; color: "#ffffff" }
+                    }
+
+                    gradient: ListView.isCurrentItem ? highlightGradient : regularGradient
+
+
+                    // Account information
+                    Image {
+                        anchors.left: parent.left
+                        anchors.leftMargin: 10
+                        id: accountIcon
+                        source: icon
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    PlasmaComponents.Label {
+                        id: accountLabel
+                        anchors.left: accountIcon.right
+                        anchors.verticalCenter: accountIcon.verticalCenter
+                        anchors.margins: 10
+                        font.weight: Font.Bold
+                        text: label
+                    }
+                    // Account status
+                    Image {
+                        anchors.right: parent.right
+                        anchors.rightMargin: 10
+                        id: statusIcon
+                        source: accountStatus == 1 ? "../../images/user-online.png" : "../../images/user-offline.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+                    PlasmaComponents.Label {
+                        id: statusLabel
+                        anchors.right: statusIcon.left
+                        anchors.verticalCenter: statusIcon.verticalCenter
+                        anchors.margins: 10
+                        color: "#666666"
+                        text: accountStatus == 1 ? i18n("online") : i18n("offline")
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        hoverEnabled: false
+                        onClicked: {
+                            list.currentIndex = index
+                            selectedItem(accountLabel, accountStatus)
+                        }
+                    }
+                }
+            }
         }
-    }
+    }  
 
     // Static model for presentation purpose (ctrl-c ctrl-v powah!)
     ListModel {

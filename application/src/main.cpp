@@ -37,7 +37,7 @@ static const char HOME_URL[] = "";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("active-ktp", 0, ki18n("Plasma Active Instant Messenger"), version, ki18n(description),
+    KAboutData about("ktp-active", 0, ki18n("Plasma Active Instant Messenger"), version, ki18n(description),
                      KAboutData::License_GPL, ki18n("Copyright 2012 Artur Dębski"), KLocalizedString(), 0, "xmentero@gmail.com");
                      about.addAuthor( ki18n("Artur Dębski"), KLocalizedString(), "xmentero@gmail.com" );
     KCmdLineArgs::init(argc, argv, &about);
