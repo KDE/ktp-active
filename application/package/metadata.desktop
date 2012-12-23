@@ -19,3 +19,4 @@ X-Plasma-MainScript=ui/main.qml
 
 ServiceTypes=Plasma/Applet
 X-Plasma-API=declarativeappletscript
+X-Plasma-DefaultSize=800,600

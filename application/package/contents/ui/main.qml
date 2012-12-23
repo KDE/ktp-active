@@ -27,17 +27,19 @@ import org.kde.draganddrop 1.0
 import org.kde.qtextracomponents 0.1
 
 import "Accounts"
+import "Chat"
+import "Contacts"
 
 Image {
-    id: rootItem
+    id: root
     source: "image://appbackgrounds/standard"
     fillMode: Image.Tile
     asynchronous: true
     width: 800
-    height: 500
+    height: 600
     anchors.margins: 8
 
-    property int minimumWidth: 500
+    property int minimumWidth: 400
     property int minimumHeight: 300
 
     signal dialogOpen(string qmlSource);
@@ -50,21 +52,54 @@ Image {
     }
 
     PlasmaComponents.Button {
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
         text: i18n("Open accounts")
         onClicked: { dialogOpen("Accounts/AccountView.qml"); }
     }
 
-    PlasmaCore.FrameSvgItem {
-        id: dialog
+    Row {
         anchors.fill: parent
-        anchors.margins: 50
-        visible: false
-
-        Loader {
-            id: loader
-            anchors.fill: parent
-            anchors.bottomMargin: 15
+        ContactsView {
+            width: parent.width * 0.3
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
         }
-        imagePath: "translucent/dialogs/background"
+
+        ChatView {
+            width: parent.width * 0.7
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+        }
+    }
+
+    Item {
+        id: dialog
+        visible: false
+        anchors.fill: root
+
+        Rectangle {
+            focus: false
+            anchors.fill: parent
+            color: "#000000"
+            opacity: 0.3
+            MouseArea {
+                // blocks mouse events on root element
+                anchors.fill: parent
+            }
+        }
+
+        PlasmaCore.FrameSvgItem {
+            anchors.fill: parent
+            anchors.margins: 50
+
+            Loader {
+                id: loader
+                anchors.fill: parent
+                anchors.bottomMargin: 15
+            }
+            imagePath: "dialogs/background"
+        }
+
     }
 }

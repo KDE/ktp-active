@@ -10,10 +10,15 @@ Item {
     id: rootToolbar
     anchors.left: parent.left
     anchors.right: parent.right
-    height: childrenRect.height + 20
+    height: toolbarMenu.height
 
     state: "DEFAULT"
 
+    signal homeSignal;
+    signal addSignal;
+    signal editSignal;
+    signal deleteSignal;
+    signal saveSignal;
     signal closeSignal;
 
     // Debug rectangle
@@ -37,7 +42,7 @@ Item {
                 flat: false
                 height: addButton.height * 1.5
                 width: addButton.height * 1.5
-                onClicked: { rootToolbar.state = "DEFAULT" }
+                onClicked: homeSignal()
                 anchors.verticalCenter: toolbar.verticalCenter
             }
 
@@ -45,7 +50,7 @@ Item {
                 id: addButton
                 text: i18n("Add account")
                 flat: false
-                onClicked: { rootToolbar.state = "FORM" }
+                onClicked: addSignal();
                 anchors.verticalCenter: toolbar.verticalCenter
             }
 
@@ -55,12 +60,14 @@ Item {
                 text: i18n("Edit account")
                 flat: false
                 anchors.verticalCenter: toolbar.verticalCenter
+                onClicked: editSignal();
             }
             PlasmaComponents.ToolButton {
                 id: deleteButton
                 text: i18n("Delete account")
                 flat: false
                 anchors.verticalCenter: toolbar.verticalCenter
+                onClicked: deleteSignal();
             }
             PlasmaComponents.ToolButton {
                 id: onoffButton
@@ -69,7 +76,7 @@ Item {
                 iconSource: checked ? "user-online" : "user-offline"
                 flat: false
                 checkable: true
-                anchors.verticalCenter: toolbar.verticalCenter
+                anchors.verticalCenter: toolbar.verticalCenter                
             }
 
             PlasmaComponents.ToolButton {
@@ -79,6 +86,7 @@ Item {
                 anchors.verticalCenter: toolbar.verticalCenter
                 anchors.right: cancelButton.left
                 anchors.rightMargin: 10
+                onClicked: saveSignal();
             }
 
             PlasmaComponents.ToolButton {
@@ -119,250 +127,4 @@ Item {
             PropertyChanges { target: saveButton; visible: false }
         }
     ]
-
-
-
-//    Row {
-//        id: devicesFlow
-//        spacing: 4
-//        anchors {
-//            // bottom: parent.bottom
-//            verticalCenter: parent.verticalCenter
-//            left: parent.left
-//        }
-
-//        property int itemCount: 1
-//        property string currentUdi
-
-//        Item {
-//            width: theme.largeIconSize
-//            height: width
-//            PlasmaComponents.ToolButton {
-//                id: upButton
-//                anchors.fill: parent
-//                flat: false
-//                iconSource: "go-up"
-//                visible: currentUdi != "" &&
-//                    devicesSource.data[currentUdi] &&
-//                    dirModel.url.indexOf(devicesSource.data[currentUdi]["File Path"]) !== -1 &&
-//                    "file://" + devicesSource.data[currentUdi]["File Path"] !== dirModel.url
-//                onClicked: dirModel.url = dirModel.url+"/.."
-//            }
-//        }
-
-//        PlasmaComponents.ToolButton {
-//            id: localButton
-//            width: theme.mediumIconSize + 10
-//            height: width
-//            iconSource: "drive-harddisk"
-//            checked: fileBrowserRoot.model == metadataModel
-//            onClicked: checked = true
-//            onCheckedChanged: {
-//                if (checked) {
-//                    for (var i = 0; i < devicesFlow.children.length; ++i) {
-//                        var child = devicesFlow.children[i]
-//                        if (child != localButton && child.checked !== undefined) {
-//                            child.checked = false
-//                        }
-//                    }
-//                    for (child in devicesFlow.children) {
-//                        if (child != localButton) {
-//                            child.checked = false
-//                        }
-//                    }
-//                    fileBrowserRoot.model = metadataModel
-//                    //nepomuk db, not filesystem
-//                    resourceBrowser.currentUdi = ""
-//                }
-//            }
-//            DropArea {
-//                enabled: !parent.checked
-//                anchors.fill: parent
-//                onDragEnter: parent.flat = false
-//                onDragLeave: parent.flat = true
-//                onDrop: {
-//                    parent.flat = true
-//                    application.copy(event.mimeData.urls, "~")
-//                }
-//            }
-//        }
-
-
-//        Repeater {
-//            id: devicesRepeater
-//            model: devicesModel
-
-//            delegate: PlasmaComponents.ToolButton {
-//                id: removableButton
-//                width: theme.mediumIconSize + 10
-//                height: width
-//                visible: devicesSource.data[udi]["Removable"] == true
-//                iconSource: model["icon"]
-//                onClicked: checked = true
-//                onCheckedChanged: {
-//                    if (checked) {
-//                        for (var i = 0; i < devicesFlow.children.length; ++i) {
-//                            var child = devicesFlow.children[i]
-//                            if (child != removableButton && child.checked !== undefined) {
-//                                child.checked = false
-//                            }
-//                        }
-//                        resourceBrowser.currentUdi = udi
-
-//                        if (devicesSource.data[udi]["Accessible"]) {
-//                            dirModel.url = devicesSource.data[udi]["File Path"]
-
-//                            fileBrowserRoot.model = dirModel
-//                        } else {
-//                            var service = devicesSource.serviceForSource(udi);
-//                            var operation = service.operationDescription("mount");
-//                            service.startOperationCall(operation);
-//                        }
-//                    }
-//                }
-//                DropArea {
-//                    enabled: !parent.checked
-//                    anchors.fill: parent
-//                    onDragEnter: parent.flat = false
-//                    onDragLeave: parent.flat = true
-//                    onDrop: {
-//                        application.copy(event.mimeData.urls, devicesSource.data[udi]["File Path"])
-//                        parent.flat = true
-//                    }
-//                }
-//            }
-//        }
-
-//        PlasmaComponents.ToolButton {
-//            id: trashButton
-//            width: theme.mediumIconSize + 10
-//            height: width
-//            parent: devicesFlow
-//            iconSource: "user-trash"
-//            onClicked: checked = true
-//            onCheckedChanged: {
-//                if (checked) {
-//                    for (var i = 0; i < devicesFlow.children.length; ++i) {
-//                        var child = devicesFlow.children[i]
-//                        if (child != trashButton && child.checked !== undefined) {
-//                            child.checked = false
-//                        }
-//                    }
-//                    resourceBrowser.currentUdi = ""
-
-//                    dirModel.url = "trash:/"
-
-//                    fileBrowserRoot.model = dirModel
-//                }
-//            }
-//            DropArea {
-//                enabled: !parent.checked
-//                anchors.fill: parent
-//                onDragEnter: parent.flat = false
-//                onDragLeave: parent.flat = true
-//                onDrop: {
-//                    parent.flat = true
-//                    application.trash(event.mimeData.urls)
-//                }
-//            }
-//        }
-//    }
-
-//    MobileComponents.ViewSearch {
-//        id: searchBox
-//        anchors.centerIn: parent
-//        visible: fileBrowserRoot.model == metadataModel
-
-//        onSearchQueryChanged: {
-//            if (searchQuery.length > 3) {
-//                // the "*" are needed for substring match.
-//                metadataModel.extraParameters["nfo:fileName"] = "*" + searchBox.searchQuery + "*"
-//            } else {
-//                metadataModel.extraParameters["nfo:fileName"] = ""
-//            }
-//        }
-//        busy: metadataModel.running
-//    }
-
-//    Item {
-//        anchors {
-//            bottom: parent.bottom
-//        }
-//        x: parent.width - resourceBrowser.visibleDrawerWidth + toolBar.margins.left
-//        z: 900
-//        PlasmaComponents.ButtonRow {
-//            id: tabsRow
-//            anchors {
-//                bottom: parent.bottom
-//                bottomMargin: - toolBar.margins.bottom
-//            }
-//            z: 900
-
-//            height: theme.defaultFont.mSize.height * 1.6
-//            exclusive: true
-
-//            PlasmaComponents.ToolButton {
-//                id: mainTab
-//                text: i18n("Filters")
-//                flat: false
-//                width: sidebar.width / 3
-//                height: parent.height - 1
-//                onCheckedChanged: {
-//                    if (checked) {
-//                        sidebarTabGroup.currentTab = categorySidebar
-//                    }
-//                }
-//            }
-
-//            PlasmaComponents.ToolButton {
-//                text: i18n("Time")
-//                enabled: fileBrowserRoot.model == metadataModel
-//                flat: false
-//                width: sidebar.width / 3
-//                height: parent.height - 1
-//                onCheckedChanged: {
-//                    if (checked) {
-//                        sidebarTabGroup.currentTab = timelineSidebar
-//                    }
-//                }
-//            }
-
-//            PlasmaComponents.ToolButton {
-//                text: i18n("Tags")
-//                enabled: fileBrowserRoot.model == metadataModel
-//                flat: false
-//                width: sidebar.width / 3
-//                height: parent.height - 1
-//                onCheckedChanged: {
-//                    if (checked) {
-//                        sidebarTabGroup.currentTab = tagsSidebar
-//                    }
-//                }
-//            }
-//            //fake: just to show something then overshooting
-//            PlasmaComponents.ToolButton {
-//                flat: false
-//                width: sidebar.width / 3
-//                height: parent.height-1
-//                enabled: false
-//                opacity: 1
-//            }
-//        }
-//    }
-
-//    PlasmaComponents.ToolButton {
-//        id: emptyTrashButton
-//        width: theme.largeIconSize
-//        height: width
-//        anchors {
-//            right: tabsRow.left
-//            verticalCenter: parent.verticalCenter
-//            rightMargin: y
-//        }
-//        visible: fileBrowserRoot.model == dirModel && dirModel.url == "trash:/"
-//        enabled: dirModel.count > 0
-//        iconSource: "trash-empty"
-//        onClicked: application.emptyTrash()
-//    }
-
 }

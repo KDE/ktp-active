@@ -6,31 +6,35 @@ Item {
     width: parent
     height: parent
 
-    ToolBar{
-        id: toolbar
-        width: parent        
-        onCloseSignal: { rootItem.dialogClose() }
-    }
-
-    PlasmaExtras.Heading {
-        id: header
-        anchors.top: toolbar.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        text: i18n("Accounts list")
-        color: "#666666"
-    }
-
-    AccountList {
-        id: list
-        anchors {
-            top: header.bottom
-            topMargin: 15
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-            leftMargin: parent.width * 0.025
-            rightMargin: parent.width * 0.025
+    Column {
+        spacing: 5
+        anchors.fill: parent
+        ToolBar{
+            id: toolbar
+            onHomeSignal: { toolbar.state = "DEFAULT"; list.selectedAccountIndex = -1 }
+            onAddSignal:  { toolbar.state = "FORM" }
+            onEditSignal: { toolbar.state = "FORM" }
+            onSaveSignal: { toolbar.state = "DEFAULT" }
+            onCloseSignal: { root.dialogClose() }
         }
-        onSelectedItem: toolbar.state = "EDIT";
+
+        PlasmaExtras.Heading {
+            id: header
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: i18n("Accounts list")
+            color: "#666666"
+        }
+
+        AccountList {
+            id: list
+            width: parent.width * 0.9
+            anchors.top: header.bottom
+            anchors.topMargin: 15
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            onSelectedItem: toolbar.state = "EDIT";
+        }
     }
+
+
 }
