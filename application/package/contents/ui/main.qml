@@ -30,6 +30,8 @@ import "Accounts"
 import "Chat"
 import "Contacts"
 
+import "Toolbar"
+
 Image {
     id: root
     source: "image://appbackgrounds/standard"
@@ -58,15 +60,34 @@ Image {
         onClicked: { dialogOpen("Accounts/AccountView.qml"); }
     }
 
+    Toolbar {
+        id: toolbar
+        height: 50
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+        onSettingsClicked: contactsView.sidebarVisible = !contactsView.sidebarVisible
+    }
+
     Row {
-        anchors.fill: parent
+        anchors {
+            top: toolbar.bottom
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
+
         ContactsView {
+            id: contactsView
             width: parent.width * 0.3
             anchors.top: parent.top
             anchors.bottom: parent.bottom
         }
 
         ChatView {
+            id: chatView
             width: parent.width * 0.7
             anchors.top: parent.top
             anchors.bottom: parent.bottom

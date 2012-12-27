@@ -11,7 +11,7 @@ Item {
 
     signal selectedItem(string name, int state);
 
-    property int selectedAccountIndex: -1
+    property alias selectedAccountIndex: list.currentIndex
 
     PlasmaExtras.ScrollArea {
         id: scrollArea
@@ -20,14 +20,10 @@ Item {
 
         // TODO: change sections for custom colapsable group (multiple headers+listviews/models)
         ListView {
-            currentIndex: selectedAccountIndex
             id: list
+            currentIndex: -1
             model: testModel
             delegate: entryDelegate
-
-//            section.delegate: sectionDelegate
-//            section.criteria: valueOf(contactStatus)
-//            section.property: "contactStatus"
 
             focus: true
             smooth: true

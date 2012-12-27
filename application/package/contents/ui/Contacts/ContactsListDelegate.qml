@@ -9,7 +9,7 @@ Component {
         id: signleEntry
         anchors.left: parent.left
         anchors.right: parent.right
-        height: accountIcon.height + 10
+        height: avatar.height + 10
         border.color: ListView.isCurrentItem ? "#006600" : "#cccccc"
 
         Rectangle {
@@ -41,14 +41,14 @@ Component {
         Image {
             anchors.left: parent.left
             anchors.leftMargin: 10
-            id: accountIcon
+            id: avatar
             source: contactAvatar
             anchors.verticalCenter: parent.verticalCenter
         }
         PlasmaComponents.Label {
-            id: accountLabel
-            anchors.left: accountIcon.right
-            anchors.verticalCenter: accountIcon.verticalCenter
+            id: contactLabel
+            anchors.left: avatar.right
+            anchors.verticalCenter: avatar.verticalCenter
             anchors.margins: 10
             font.weight: Font.Bold
             text: contactName
@@ -70,7 +70,7 @@ Component {
                     selectedAccountIndex = -1
                 } else {
                     selectedAccountIndex = index
-                    selectedItem(contactName, accountStatus)
+                    selectedItem(contactName, contactStatus)
                 }
             }
         }

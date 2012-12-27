@@ -8,6 +8,10 @@ Item {
     width: 100
     height: 62
 
+    property bool sidebarVisible: false
+
+    state: sidebarVisible ? "SIDEBAR_ON" : "SIDEBAR_OFF"
+
 // Debuge rectangle
 //    Rectangle {
 //        anchors.fill: parent
@@ -15,70 +19,43 @@ Item {
 //        color: "lightsteelblue"
 //    }
 
-    ContactsToolbar {
-        id: toolbar
+    ContactsList {
         anchors {
+            margins: 2
             top: parent.top
-            left: parent.left
+            bottom: parent.bottom
+            left: settingsBar.right
             right: parent.right
         }
-
-        onSettingButtonClicked:
-            if (settingsButtonCheck) {
-                settingsBar.opacity = 1
-                settingsBar.width = 60
-            } else {
-                settingsBar.opacity = 0
-                settingsBar.width = 0
-            }
     }
 
     ContactsSidebar {
         id: settingsBar
         anchors {
             topMargin: 2
-            top: toolbar.bottom
+            top: parent.top
             bottom: parent.bottom
             left: parent.left
         }
     }
 
-    ContactsList {
-        anchors {
-            margins: 2
-            top: toolbar.bottom
-            bottom: parent.bottom
-            left: settingsBar.right
-            right: parent.right
+    states: [
+        State {
+            name: "SIDEBAR_ON"
+            PropertyChanges {
+                target: settingsBar
+                opacity: 1
+                width: 60
+            }
+        },
+        State {
+            name: "SIDEBAR_ON"
+            PropertyChanges {
+                target: settingsBar
+                opacity: 0
+                width: 0
+            }
         }
-    }
-    /*
-    PlasmaComponents.Dialog {
-        id: statusChooser
-        content: picker
 
-        Column {
-            id: picker
-            PlasmaExtras.Heading {
-                id: title
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: i18n("Pick your status")
-            }
-            PlasmaComponents.ButtonColumn {
-                anchors.top: title.bottom
-                anchors.left: parent.left
-                anchors.right: parent.right
-                PlasmaComponents.RadioButton {
-                    text: i18n("Online")
-                }
-                PlasmaComponents.RadioButton {
-                    text: i18n("Offline")
-                }
-            }
-            PlasmaComponents.Button {
-                text: i18n("Change status")
-            }
-        }
-    }
-    */
+    ]
 }

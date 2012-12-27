@@ -9,13 +9,4 @@ Item {
         opacity: 0.4
         color: "yellow"
     }
-
-    ChatToolbar {
-        id: toolbar
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-    }
 }
