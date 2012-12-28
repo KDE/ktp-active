@@ -4,41 +4,64 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
-    anchors.fill: parent
-    PlasmaComponents.ToolButton {
-        id: settingButton
-        iconSource: "configure"
-        width: parent.height * 0.9
-        height: parent.height * 0.9
+    id: layout
+    height: childrenRect.height
 
-        anchors {
-            verticalCenter: parent.verticalCenter
-            left: parent.left
-            leftMargin: 10
-        }
+    property alias settingsChecked: settingsButton.checked
+
+    PlasmaComponents.ToolButton {
+        id: settingsButton
+        iconSource: "applications-system"
+        width: theme.largeIconSize
+        height: theme.largeIconSize
 
         flat: false
         checkable: true
-        onClicked: settingsClicked();
+        checked: true
+    }
+
+    StatusPicker {
+        id: picker
+        anchors {
+            verticalCenter: parent.verticalCenter
+            left: settingsButton.right
+            leftMargin: 10
+        }
     }
 
     PlasmaComponents.ToolButton {
-        id: statusButton
-        text: i18n("Online")
-        iconSource: "user-online"
-        height: parent.height * 0.75
-
+        id: textStatusButton
+        iconSource: "flag"
+        width: theme.largeIconSize
+        height: theme.largeIconSize
+        flat: true
+        checkable: false
         anchors {
             verticalCenter: parent.verticalCenter
-            left: settingButton.right
+            left: picker.right
             leftMargin: 10
-            right: parent.right
-            rightMargin: 10
         }
+        onClicked: picker.state = "messageEditMode"
+    }
 
-        flat: false
-        checkable: false
-        onClicked: statusClicked();
+    PlasmaComponents.ToolButton {
+        id: notificationFriendIsWriting
+        enabled: false
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: notificationNewMessage.left
+        iconSource: "document-edit"
+        width: theme.largeIconSize
+        height: theme.largeIconSize
+    }
+
+    PlasmaComponents.ToolButton {
+        id: notificationNewMessage
+        enabled: true
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
+        iconSource: "mail-unread-new"
+        width: theme.largeIconSize
+        height: theme.largeIconSize
     }
 }
 

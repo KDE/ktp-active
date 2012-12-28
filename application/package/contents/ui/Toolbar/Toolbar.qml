@@ -4,38 +4,21 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
-    height: 50
+    height: childrenRect.height
+    anchors {
+        margins: 5
+        right: parent.right
+        left: parent.left
+    }
 
-    signal settingsClicked;
-    signal statusClicked;
+    property alias settings: content.settingsChecked
 
-    Rectangle {
-        id: background
-        anchors.fill: parent
-        color: "#cccccc"
-        gradient: regularGradient
+    PlasmaComponents.ToolBar {        
+        id: toolbar
+        tools: content
 
-        Gradient {
-            id: regularGradient
-            GradientStop { position: 0.0; color: "#dddddd" }
-            GradientStop { position: 0.85; color: "#eeeeee" }
-            GradientStop { position: 1.0; color: "#ffffff" }
+        ToolbarContent {
+            id: content
         }
     }
-
-    ToolbarContent {
-        id: content
-        anchors.fill: parent
-    }
-
-    Rectangle {
-        height: 1
-        width: parent.width
-        color: "#cccccc"
-        anchors.top: parent.bottom
-        anchors.topMargin: -1
-    }
 }
-
-
-

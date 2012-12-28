@@ -1,36 +1,15 @@
-/*
- *   Copyright 2011 Marco Martin <mart@kde.org>
- *
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as
- *   published by the Free Software Foundation; either version 2, or
- *   (at your option) any later version.
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU Library General Public License for more details
- *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, write to the
- *   Free Software Foundation, Inc.,
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
- */
-
 import QtQuick 1.1
-import org.kde.metadatamodels 0.1 as MetadataModels
-import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
+import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtras
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.draganddrop 1.0
-import org.kde.qtextracomponents 0.1
 
-import "Accounts"
+
+//import "Accounts"
 import "Chat"
-import "Contacts"
+//import "Contacts"
 
 import "Toolbar"
+import "Sidebar"
 
 Image {
     id: root
@@ -44,83 +23,70 @@ Image {
     property int minimumWidth: 400
     property int minimumHeight: 300
 
-    signal dialogOpen(string qmlSource);
-    signal dialogClose;
-    onDialogClose:{ dialog.visible = false; loader.source = ""; }
-    onDialogOpen: { dialog.visible = true; loader.source = qmlSource; }
-
     PlasmaCore.Theme {
         id: theme
     }
 
-    PlasmaComponents.Button {
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        text: i18n("Open accounts")
-        onClicked: { dialogOpen("Accounts/AccountView.qml"); }
+//    Rectangle {
+//        id: sidebar
+//        color: "green"
+//        anchors {
+//            top: toolbar.bottom
+//            bottom: parent.bottom
+//            left: parent.left
+//        }
+//        width: 50
+//    }
+
+    ChatView {
+        id: chat
+        anchors {
+            top: toolbar.bottom
+            bottom: parent.bottom
+            left: contactList.right
+            right: parent.right
+        }
+    }    
+
+    Rectangle {
+        id: contactList
+        anchors {
+            top: toolbar.bottom
+            bottom: parent.bottom
+            left: sidebar.right
+        }
+        width: parent.width*0.3
+    }
+
+    MenuSidebar {
+        id: sidebar
+        anchors.top: toolbar.bottom
+        anchors.left: parent.left
+
+        Image {
+            source: "image://appbackgrounds/shadow-left"
+            fillMode: Image.TileVertically
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                right: parent.right
+            }
+        }
+    }
+
+    // Shadows
+    Image {
+        source: "image://appbackgrounds/shadow-right"
+        fillMode: Image.TileVertically
+        anchors {
+            top: toolbar.bottom
+            bottom: parent.bottom
+            left: contactList.right
+        }
     }
 
     Toolbar {
         id: toolbar
-        height: 50
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-        onSettingsClicked: contactsView.sidebarVisible = !contactsView.sidebarVisible
-    }
-
-    Row {
-        anchors {
-            top: toolbar.bottom
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-
-        ContactsView {
-            id: contactsView
-            width: parent.width * 0.3
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-        }
-
-        ChatView {
-            id: chatView
-            width: parent.width * 0.7
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-        }
-    }
-
-    Item {
-        id: dialog
-        visible: false
-        anchors.fill: root
-
-        Rectangle {
-            focus: false
-            anchors.fill: parent
-            color: "#000000"
-            opacity: 0.3
-            MouseArea {
-                // blocks mouse events on root element
-                anchors.fill: parent
-            }
-        }
-
-        PlasmaCore.FrameSvgItem {
-            anchors.fill: parent
-            anchors.margins: 50
-
-            Loader {
-                id: loader
-                anchors.fill: parent
-                anchors.bottomMargin: 15
-            }
-            imagePath: "dialogs/background"
-        }
-
+        onSettingsChanged: settings ? sidebar.state = "shown" : sidebar.state = "hidden"
     }
 }

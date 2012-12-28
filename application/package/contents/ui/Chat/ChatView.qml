@@ -1,12 +1,16 @@
 import QtQuick 1.1
 
-Item {
-    width: 100
-    height: 62
+import "../Toolbar"
 
-    Rectangle {
-        anchors.fill: parent
-        opacity: 0.4
-        color: "yellow"
+Image {
+    source: "image://appbackgrounds/contextarea"
+    fillMode: Image.Tile
+
+    Toolbar {
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
     }
 }
