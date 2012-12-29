@@ -5,7 +5,7 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
     id: layout
-    height: childrenRect.height
+    height: Math.max(settingsButton.height, picker.height)
 
     property alias settingsChecked: settingsButton.checked
 
@@ -27,21 +27,6 @@ Item {
             left: settingsButton.right
             leftMargin: 10
         }
-    }
-
-    PlasmaComponents.ToolButton {
-        id: textStatusButton
-        iconSource: "flag"
-        width: theme.largeIconSize
-        height: theme.largeIconSize
-        flat: true
-        checkable: false
-        anchors {
-            verticalCenter: parent.verticalCenter
-            left: picker.right
-            leftMargin: 10
-        }
-        onClicked: picker.state = "messageEditMode"
     }
 
     PlasmaComponents.ToolButton {

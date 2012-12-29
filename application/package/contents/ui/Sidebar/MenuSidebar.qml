@@ -8,12 +8,15 @@ Image {
     state: "shown"
     source: "image://appbackgrounds/contextarea"
     fillMode: Image.Tile
+    width: menuColumn.width
     anchors {
         top: parent.top
         bottom: parent.bottom
     }
 
     PlasmaComponents.ButtonColumn {
+        id: menuColumn
+        width: theme.largeIconSize
         exclusive: false
         spacing: 10
         anchors {
@@ -51,7 +54,7 @@ Image {
             PropertyChanges {
                 target: sidebarRoot
                 opacity: 1
-                width: childrenRect.width * 1.2
+                width: menuColumn.width * 1.2
             }
         }
     ]

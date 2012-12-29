@@ -13,9 +13,10 @@ Item {
 
     property alias settings: content.settingsChecked
 
-    PlasmaComponents.ToolBar {        
+    PlasmaComponents.ToolBar {
         id: toolbar
         tools: content
+        height: content.height
 
         ToolbarContent {
             id: content

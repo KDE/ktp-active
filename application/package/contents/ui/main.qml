@@ -27,17 +27,6 @@ Image {
         id: theme
     }
 
-//    Rectangle {
-//        id: sidebar
-//        color: "green"
-//        anchors {
-//            top: toolbar.bottom
-//            bottom: parent.bottom
-//            left: parent.left
-//        }
-//        width: 50
-//    }
-
     ChatView {
         id: chat
         anchors {
@@ -45,6 +34,16 @@ Image {
             bottom: parent.bottom
             left: contactList.right
             right: parent.right
+        }
+
+        Image {
+            source: "image://appbackgrounds/shadow-right"
+            fillMode: Image.TileVertically
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                left: parent.left
+            }
         }
     }    
 
@@ -71,17 +70,6 @@ Image {
                 bottom: parent.bottom
                 right: parent.right
             }
-        }
-    }
-
-    // Shadows
-    Image {
-        source: "image://appbackgrounds/shadow-right"
-        fillMode: Image.TileVertically
-        anchors {
-            top: toolbar.bottom
-            bottom: parent.bottom
-            left: contactList.right
         }
     }
 
