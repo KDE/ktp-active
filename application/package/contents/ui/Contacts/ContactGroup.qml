@@ -4,45 +4,34 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
-    id: rootAcountList
-    //Default size:
-    width: 200
-    height: 300
 
-    signal selectedItem(string name, int state);
+    height: groupHead.height + ( groupBody.visible ? groupBody.height : 0)
 
-    property alias selectedAccountIndex: list.currentIndex
+    Behavior on height {
+        SequentialAnimation {
+             NumberAnimation { properties: "height"; easing.type: Easing.InOutQuad; duration: 750  }
+         }
+    }
 
-    PlasmaExtras.ScrollArea {
-        id: scrollArea
-        anchors.fill: parent
-        flickableItem: list
+    property alias name: groupHead.text
 
-        // TODO: change sections for custom colapsable group (multiple headers+listviews/models)
-        ListView {
-            id: list
-            currentIndex: -1
-            model: testModel
-            delegate: entryDelegate
+    GroupHead {
+        id: groupHead
+        anchors.left: parent.left
+        anchors.right: parent.right
+    }
 
-            focus: true
-            smooth: true
-            snapMode: ListView.SnapToItem
-            flickableDirection: Flickable.VerticalFlick
-            spacing: 2
-            clip: true
-
-            ContactsListDelegate {
-                id: entryDelegate
-            }
-
-            ContactsSectionDelegate {
-                id: sectionDelegate
-            }
+    GroupBody {
+        id: groupBody
+        model: testModel
+        visible: groupHead.expanded
+        anchors {
+            top: groupHead.bottom
+            left: parent.left
+            right: parent.right
         }
     }
 
-    // Static model for presentation purpose (ctrl-c ctrl-v powah!)
     ListModel {
         id: testModel
         ListElement {
@@ -105,6 +94,5 @@ Item {
             contactAvatar: "../../images/im-user-away.png"
             contactStatus: 1
         }
-
     }
 }

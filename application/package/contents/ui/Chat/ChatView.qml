@@ -6,7 +6,7 @@ Image {
     source: "image://appbackgrounds/contextarea"
     fillMode: Image.Tile
 
-    Toolbar {
+    ChatToolbar {
         anchors {
             top: parent.top
             left: parent.left

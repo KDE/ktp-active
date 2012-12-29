@@ -6,7 +6,7 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 //import "Accounts"
 import "Chat"
-//import "Contacts"
+import "Contacts"
 
 import "Toolbar"
 import "Sidebar"
@@ -47,7 +47,7 @@ Image {
         }
     }    
 
-    Rectangle {
+    ContactsView {
         id: contactList
         anchors {
             top: toolbar.bottom
