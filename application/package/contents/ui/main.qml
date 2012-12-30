@@ -4,7 +4,7 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 
-//import "Accounts"
+import "Accounts"
 import "Chat"
 import "Contacts"
 
@@ -71,10 +71,57 @@ Image {
                 right: parent.right
             }
         }
+
+        onAccountsClicked: {
+            dialog.source = ("./Accounts/AccountView.qml");
+            dialog.open();
+            console.log("open account dialog");
+        }
     }
 
     Toolbar {
         id: toolbar
         onSettingsChanged: settings ? sidebar.state = "shown" : sidebar.state = "hidden"
     }
+
+    Rectangle {
+        id: tint
+        focus: false
+        visible: false
+        anchors.fill: root
+        color: "#000000"
+        opacity: 0.3
+        MouseArea {
+            anchors.fill: parent
+        }
+    }
+
+    Dialog {
+        id: dialog
+        width: root.width * 0.85
+        height: root.height * 0.85
+        anchors.centerIn: parent
+
+        onDialogOpen: tint.visible = true
+        onDialogClosed: tint.visible = false
+    }
+
+
+
+//    PlasmaComponents.Dialog {
+//        id: dialog
+//        content: loader
+//        width: parent.width * 0.9
+//        height: parent.height * 0.9
+//        anchors.centerIn: parent
+
+//        property alias source : content.source
+
+//        onClickedOutside: null;
+
+//        Loader {
+//            id: content
+//            anchors.fill: parent
+//        }
+//    }
 }

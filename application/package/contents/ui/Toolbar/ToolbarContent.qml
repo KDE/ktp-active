@@ -11,10 +11,11 @@ Item {
 
     PlasmaComponents.ToolButton {
         id: settingsButton
-        iconSource: "applications-system"
-        width: theme.largeIconSize
-        height: theme.largeIconSize
+        width: theme.mediumIconSize
+        height: theme.mediumIconSize
+        anchors.verticalCenter: parent.verticalCenter
 
+        iconSource: "format-justify-fill"
         flat: false
         checkable: true
         checked: true

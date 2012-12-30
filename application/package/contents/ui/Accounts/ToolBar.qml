@@ -8,8 +8,6 @@ import org.kde.qtextracomponents 0.1
 
 Item {
     id: rootToolbar
-    anchors.left: parent.left
-    anchors.right: parent.right
     height: toolbarMenu.height
 
     state: "DEFAULT"
@@ -30,73 +28,81 @@ Item {
 
     PlasmaComponents.ToolBar {
         id: toolbarMenu
+        anchors.left: parent.left
+        anchors.right: parent.right
         tools: toolbar
 
         PlasmaComponents.ToolBarLayout
         {
             id: toolbar
-            spacing: 10
-            PlasmaComponents.ToolButton {
-                id: homeButton
-                iconSource: "go-home"
-                flat: false
-                height: addButton.height * 1.5
-                width: addButton.height * 1.5
-                onClicked: homeSignal()
-                anchors.verticalCenter: toolbar.verticalCenter
-            }
+            width: parent.width
+            Row {
+                id: leftContainer
+                width: childrenRect.width
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 10
+                PlasmaComponents.ToolButton {
+                    id: homeButton
+                    iconSource: "go-home"
+                    flat: false
+                    height: addButton.height * 1.5
+                    width: addButton.height * 1.5
+                    onClicked: homeSignal()
+                    anchors.verticalCenter: parent.verticalCenter
+                }
 
-            PlasmaComponents.ToolButton {
-                id: addButton
-                text: i18n("Add account")
-                flat: false
-                onClicked: addSignal();
-                anchors.verticalCenter: toolbar.verticalCenter
-            }
+                PlasmaComponents.ToolButton {
+                    id: addButton
+                    text: i18n("Add account")
+                    flat: false
+                    onClicked: addSignal();
+                    anchors.verticalCenter: parent.verticalCenter
+                }
 
-            // Hidden buttons
-            PlasmaComponents.ToolButton {
-                id: editButton
-                text: i18n("Edit account")
-                flat: false
-                anchors.verticalCenter: toolbar.verticalCenter
-                onClicked: editSignal();
+                // Hidden buttons
+                PlasmaComponents.ToolButton {
+                    id: editButton
+                    text: i18n("Edit account")
+                    flat: false
+                    onClicked: editSignal();
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                PlasmaComponents.ToolButton {
+                    id: deleteButton
+                    text: i18n("Delete account")
+                    flat: false
+                    onClicked: deleteSignal();
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                PlasmaComponents.ToolButton {
+                    id: onoffButton
+                    height: addButton.height * 1.5
+                    width: addButton.height * 1.5
+                    iconSource: checked ? "user-online" : "user-offline"
+                    flat: false
+                    checkable: true
+                    anchors.verticalCenter: parent.verticalCenter
+                }
             }
-            PlasmaComponents.ToolButton {
-                id: deleteButton
-                text: i18n("Delete account")
-                flat: false
-                anchors.verticalCenter: toolbar.verticalCenter
-                onClicked: deleteSignal();
-            }
-            PlasmaComponents.ToolButton {
-                id: onoffButton
-                height: addButton.height * 1.5
-                width: addButton.height * 1.5
-                iconSource: checked ? "user-online" : "user-offline"
-                flat: false
-                checkable: true
-                anchors.verticalCenter: toolbar.verticalCenter                
-            }
+            Row {
+                id: rightContainer
+                width: cancelButton.width*2 + 10
+                anchors.verticalCenter: parent.verticalCenter
+                LayoutMirroring.enabled: true
+                spacing: 10
+                PlasmaComponents.ToolButton {
+                    id: cancelButton
+                    text: i18n("Close")
+                    flat: false
+                    onClicked: closeSignal();
+                }
+                PlasmaComponents.ToolButton {
+                    id: saveButton
+                    text: i18n("Save")
+                    flat: false
+                    onClicked: saveSignal();
+                }
 
-            PlasmaComponents.ToolButton {
-                id: saveButton
-                text: i18n("Save")
-                flat: false
-                anchors.verticalCenter: toolbar.verticalCenter
-                anchors.right: cancelButton.left
-                anchors.rightMargin: 10
-                onClicked: saveSignal();
-            }
-
-            PlasmaComponents.ToolButton {
-                // Prints warning but prevents disappering when changing visibility of previous elements
-                anchors.right: toolbar.right
-                id: cancelButton
-                text: i18n("Close")
-                flat: false
-                anchors.verticalCenter: toolbar.verticalCenter
-                onClicked: closeSignal();
             }
         }
     }

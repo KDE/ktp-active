@@ -33,6 +33,16 @@ Rectangle {
                 border.color: "#cccccc"
                 gradient: regularGradient
 
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: false
+                    onPressed: parent.gradient = highlightGradient
+                    onReleased: parent.gradient = regularGradient
+                    onPositionChanged: parent.gradient = regularGradient
+                    //onClicked: open chat
+                    //onPressAndHold: show account detail
+                }
+
                 Gradient {
                     id: regularGradient
                     GradientStop { position: 0.0; color: "#ffffff" }
@@ -70,6 +80,7 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter
                     opacity: contactStatus == 1 ? 1 : 0.2
                 }
+
             }
         }
     }

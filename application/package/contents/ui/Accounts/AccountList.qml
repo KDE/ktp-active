@@ -5,20 +5,16 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
     id: rootAcountList
-    //Default size:
-    width: 200
-    height: 300
 
     signal selectedItem(string name, int state);
-
     property int selectedAccountIndex: -1
 
-    // Debug rectangle
+//    //Debug rectangle
 //    Rectangle {
-//        //color: "blue"
+//        color: "blue"
 //        opacity: 0.3
 //        anchors.fill: parent
-//        //border.color: "black"
+//        border.color: "black"
 //    }
 
     PlasmaExtras.ScrollArea {

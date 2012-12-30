@@ -149,7 +149,7 @@ Item {
 
         PlasmaComponents.ToolButton {
             id: useMessageButton
-            iconSource: "mail-tagged"
+            iconSource: "view-conversation-balloon"
             width: statusTabbar.height
             height: statusTabbar.height
             flat: true

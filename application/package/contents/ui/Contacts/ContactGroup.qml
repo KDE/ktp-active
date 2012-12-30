@@ -4,14 +4,16 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
+    id: groupRoot
+    height: groupHead.height + groupBody.height
 
-    height: groupHead.height + ( groupBody.visible ? groupBody.height : 0)
+//    Behavior on height {
+//        SequentialAnimation {
+//             NumberAnimation { properties: "height"; easing.type: Easing.InOutQuad; duration: 750  }
+//         }
+//    }
 
-    Behavior on height {
-        SequentialAnimation {
-             NumberAnimation { properties: "height"; easing.type: Easing.InOutQuad; duration: 750  }
-         }
-    }
+    state: groupHead.expanded ? "unrolled" : "rolled"
 
     property alias name: groupHead.text
 
@@ -24,13 +26,57 @@ Item {
     GroupBody {
         id: groupBody
         model: testModel
-        visible: groupHead.expanded
         anchors {
             top: groupHead.bottom
             left: parent.left
             right: parent.right
         }
     }
+
+    states: [
+        State {
+            name: "rolled"
+            PropertyChanges {
+                target: groupBody
+                opacity: 0
+                visible: false
+            }
+            PropertyChanges {
+                target: groupRoot
+                height: groupHead.height
+            }
+        },
+        State {
+            name: "unrolled"
+            PropertyChanges {
+                target: groupBody
+                opacity: 1
+                visible: true
+            }
+            PropertyChanges {
+                target: groupRoot
+                height: groupHead.height + groupBody.height
+            }
+        }
+    ]
+
+    transitions: [
+        Transition {
+            from: "rolled"; to: "unrolled"
+            SequentialAnimation {
+                PropertyAction { target: groupBody; property: "visible"; value: "true" }
+                NumberAnimation { properties: "height"; easing.type: Easing.InOutQuad; duration: 350  }
+                NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 350  }            }
+        },
+        Transition {
+            from: "unrolled"; to: "rolled"
+            SequentialAnimation {
+                NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 350  }
+                NumberAnimation { properties: "height"; easing.type: Easing.InOutQuad; duration: 350  }
+                PropertyAction { target: groupBody; property: "visible"; value: "false" }
+            }
+        }
+    ]
 
     ListModel {
         id: testModel

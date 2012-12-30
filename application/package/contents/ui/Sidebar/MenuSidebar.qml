@@ -14,6 +14,14 @@ Image {
         bottom: parent.bottom
     }
 
+    signal hintClicked;
+    signal addUserClicked;
+    signal removeUserClicked
+    signal addGroupClicked;
+    signal removeGroupClicked;
+    signal accountsClicked;
+
+
     PlasmaComponents.ButtonColumn {
         id: menuColumn
         width: theme.largeIconSize
@@ -35,8 +43,31 @@ Image {
                 height: theme.largeIconSize
                 flat: false
                 checkable: false
-                //onClicked: buttonClicked();
+                onClicked: emitButton(index);
             }
+        }
+    }
+
+    function emitButton(argIndex) {
+        switch(argIndex) {
+        case 0:
+            hintClicked();
+            break;
+        case 1:
+            addUserClicked();
+            break;
+        case 2:
+            removeUserClicked();
+            break;
+        case 3:
+            addGroupClicked()
+            break;
+        case 4:
+            removeGroupClicked();
+            break;
+        case 5:
+            accountsClicked();
+            break;
         }
     }
 
@@ -61,7 +92,11 @@ Image {
 
     transitions: [
         Transition {
-            NumberAnimation { properties: "width, opacity"; easing.type: Easing.InOutQuad; duration: 750  }
+            ParallelAnimation {
+                NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 600  }
+                NumberAnimation { properties: "width"; easing.type: Easing.InOutQuad; duration: 300  }
+
+            }
         }
     ]
 }
