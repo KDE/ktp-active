@@ -2,7 +2,7 @@ import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtras
-
+import org.kde.plasma.mobilecomponents 0.1 as PlasmaMobile
 
 import "Accounts"
 import "Chat"
@@ -27,25 +27,46 @@ Image {
         id: theme
     }
 
-    ChatView {
-        id: chat
+    PlasmaComponents.PageStack {
         anchors {
             top: toolbar.bottom
             bottom: parent.bottom
             left: contactList.right
             right: parent.right
         }
+        initialPage: drawer
 
-        Image {
-            source: "image://appbackgrounds/shadow-right"
-            fillMode: Image.TileVertically
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: parent.left
+        PlasmaComponents.Page {
+            id: activeChat
+            anchors.fill: parent
+            ChatView {
+                id: chat
+                anchors.fill: parent
+                Image {
+                    source: "image://appbackgrounds/shadow-right"
+                    fillMode: Image.TileVertically
+                    anchors {
+                        top: parent.top
+                        bottom: parent.bottom
+                        left: parent.left
+                    }
+                }
             }
         }
-    }    
+
+        PlasmaMobile.OverlayDrawer {
+            id: drawer
+            page: chat
+            drawer: Item {
+                anchors.fill: parent
+                Rectangle {
+                    anchors.fill: parents
+                    color: "black"
+                }
+            }
+            open: false
+        }
+    }
 
     ContactsView {
         id: contactList
