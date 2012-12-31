@@ -7,15 +7,10 @@ Item {
     id: groupRoot
     height: groupHead.height + groupBody.height
 
-//    Behavior on height {
-//        SequentialAnimation {
-//             NumberAnimation { properties: "height"; easing.type: Easing.InOutQuad; duration: 750  }
-//         }
-//    }
-
     state: groupHead.expanded ? "unrolled" : "rolled"
 
     property alias name: groupHead.text
+    property alias model: groupBody.model
 
     GroupHead {
         id: groupHead
@@ -25,7 +20,6 @@ Item {
 
     GroupBody {
         id: groupBody
-        model: testModel
         anchors {
             top: groupHead.bottom
             left: parent.left

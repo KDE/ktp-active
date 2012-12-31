@@ -12,6 +12,7 @@ Item {
     }
 
     property alias settings: content.settingsChecked
+    property alias activeChats: content.activeChatsChecked
 
     PlasmaComponents.ToolBar {
         id: toolbar

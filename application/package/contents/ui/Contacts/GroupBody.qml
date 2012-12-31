@@ -3,6 +3,8 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 
+import org.kde.qtextracomponents 0.1 as PlasmaQt
+
 Rectangle {
     id: groupBodyRoot
     height: groupData.height
@@ -18,9 +20,11 @@ Rectangle {
             left: parent.left
             right: parent.right
         }
+        width: parent.width
 
         Repeater {
             id: list
+            width: parent.width
 
             Rectangle {
                 id: signleEntry
@@ -29,7 +33,7 @@ Rectangle {
                     right: parent.right
                 }
 
-                height: avatar.height + 10
+                height: contactAvatar.height + 10
                 border.color: "#cccccc"
                 gradient: regularGradient
 
@@ -58,27 +62,32 @@ Rectangle {
                 }
 
                 Image {
-                    id: avatar
+                    id: contactAvatar
                     anchors.left: parent.left
                     anchors.leftMargin: 10
-                    source: contactAvatar
+                    width: theme.mediumIconSize
+                    height: theme.mediumIconSize
+                    source: avatar ? avatar : "../../images/im-user.png"
                     anchors.verticalCenter: parent.verticalCenter
+                    smooth: true
                 }
                 PlasmaComponents.Label {
                     id: contactLabel
-                    anchors.left: avatar.right
-                    anchors.verticalCenter: avatar.verticalCenter
+                    anchors.left: contactAvatar.right
+                    anchors.verticalCenter: contactAvatar.verticalCenter
                     anchors.margins: 10
                     font.weight: Font.Bold
-                    text: contactName
+                    text: aliasName
                 }
-                Image {
+                PlasmaQt.QIconItem {
                     id: statusIcon
-                    anchors.right: parent.right
-                    anchors.rightMargin: 10
-                    source: contactStatus == 1 ? "../../images/user-online.png" : "../../images/user-offline.png"
-                    anchors.verticalCenter: parent.verticalCenter
-                    opacity: contactStatus == 1 ? 1 : 0.2
+                    icon: presenceIcon
+//                    anchors.right: parent.right
+//                    anchors.rightMargin: 10
+//                    icon: presenceIcon;
+//                    //contactStatus == 1 ? "../../images/user-online.png" : "../../images/user-offline.png"
+//                    anchors.verticalCenter: parent.verticalCenter
+//                    opacity: 1; //contactStatus == 1 ? 1 : 0.2
                 }
 
             }

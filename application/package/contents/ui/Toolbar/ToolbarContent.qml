@@ -8,6 +8,7 @@ Item {
     height: Math.max(settingsButton.height, picker.height)
 
     property alias settingsChecked: settingsButton.checked
+    property alias activeChatsChecked: notificationNewMessage.checked
 
     PlasmaComponents.ToolButton {
         id: settingsButton
@@ -43,6 +44,8 @@ Item {
     PlasmaComponents.ToolButton {
         id: notificationNewMessage
         enabled: true
+        checkable: true
+        checked: false
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
         iconSource: "mail-unread-new"

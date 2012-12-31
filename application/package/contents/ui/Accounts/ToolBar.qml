@@ -87,20 +87,22 @@ Item {
             Row {
                 id: rightContainer
                 width: cancelButton.width*2 + 10
-                anchors.verticalCenter: parent.verticalCenter
                 LayoutMirroring.enabled: true
                 spacing: 10
+                anchors.verticalCenter: parent.verticalCenter
                 PlasmaComponents.ToolButton {
                     id: cancelButton
                     text: i18n("Close")
                     flat: false
                     onClicked: closeSignal();
+                    anchors.verticalCenter: parent.verticalCenter
                 }
                 PlasmaComponents.ToolButton {
                     id: saveButton
                     text: i18n("Save")
                     flat: false
                     onClicked: saveSignal();
+                    anchors.verticalCenter: parent.verticalCenter
                 }
 
             }

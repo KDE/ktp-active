@@ -3,11 +3,12 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as PlasmaMobile
+import org.kde.telepathy.contactlist 0.1 as KtpContactList
+import org.kde.telepathy.chat 0.1 as KtpChat
 
 import "Accounts"
 import "Chat"
 import "Contacts"
-
 import "Toolbar"
 import "Sidebar"
 
@@ -24,47 +25,62 @@ Image {
     property int minimumHeight: 300
 
     PlasmaCore.Theme {
-        id: theme
+        id: theme        
     }
 
-    PlasmaComponents.PageStack {
+//    KtpChat {
+
+//    }
+
+    ChatView {
+        id: chat
         anchors {
             top: toolbar.bottom
             bottom: parent.bottom
             left: contactList.right
             right: parent.right
         }
-        initialPage: drawer
-
-        PlasmaComponents.Page {
-            id: activeChat
-            anchors.fill: parent
-            ChatView {
-                id: chat
-                anchors.fill: parent
-                Image {
-                    source: "image://appbackgrounds/shadow-right"
-                    fillMode: Image.TileVertically
-                    anchors {
-                        top: parent.top
-                        bottom: parent.bottom
-                        left: parent.left
-                    }
-                }
+        Image {
+            source: "image://appbackgrounds/shadow-right"
+            fillMode: Image.TileVertically
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                left: parent.left
             }
         }
+    }
 
-        PlasmaMobile.OverlayDrawer {
-            id: drawer
-            page: chat
-            drawer: Item {
-                anchors.fill: parent
-                Rectangle {
-                    anchors.fill: parents
-                    color: "black"
-                }
+    Image {
+        id: activeChatsPanel
+        anchors {
+            top: chat.top
+            bottom: chat.bottom
+            right: chat.right
+        }
+        width: chat.width * 0.4
+        source: "image://appbackgrounds/standard"
+        fillMode: Image.Tile
+        visible: false
+        PlasmaExtras.Title {
+            width: parent.width
+            anchors.centerIn: parent
+            wrapMode: Text.Wrap
+            text: "Active Conversations go here"
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+        }
+        Image {
+            source: "image://appbackgrounds/shadow-left"
+            fillMode: Image.TileVertically
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                right: parent.left
             }
-            open: false
+        }
+        MouseArea {
+            anchors.fill: parent
         }
     }
 
@@ -103,6 +119,7 @@ Image {
     Toolbar {
         id: toolbar
         onSettingsChanged: settings ? sidebar.state = "shown" : sidebar.state = "hidden"
+        onActiveChatsChanged: activeChatsPanel.visible = activeChats
     }
 
     Rectangle {
@@ -126,23 +143,4 @@ Image {
         onDialogOpen: tint.visible = true
         onDialogClosed: tint.visible = false
     }
-
-
-
-//    PlasmaComponents.Dialog {
-//        id: dialog
-//        content: loader
-//        width: parent.width * 0.9
-//        height: parent.height * 0.9
-//        anchors.centerIn: parent
-
-//        property alias source : content.source
-
-//        onClickedOutside: null;
-
-//        Loader {
-//            id: content
-//            anchors.fill: parent
-//        }
-//    }
 }
