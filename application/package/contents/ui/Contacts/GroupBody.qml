@@ -2,6 +2,7 @@ import QtQuick 1.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
+import org.kde.telepathy.contactlist 0.1 as KtpContactList
 
 import org.kde.qtextracomponents 0.1 as PlasmaQt
 
@@ -10,6 +11,8 @@ Rectangle {
     height: groupData.height
 
     property alias model: list.model
+
+    signal contactClicked(variant account, variant contact)
 
     Column {
         id: groupData
@@ -28,12 +31,8 @@ Rectangle {
 
             Rectangle {
                 id: signleEntry
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-
                 height: contactAvatar.height + 10
+                width: list.width
                 border.color: "#cccccc"
                 gradient: regularGradient
 
@@ -43,7 +42,7 @@ Rectangle {
                     onPressed: parent.gradient = highlightGradient
                     onReleased: parent.gradient = regularGradient
                     onPositionChanged: parent.gradient = regularGradient
-                    //onClicked: open chat
+                    onClicked: contactClicked(account, contact);
                     //onPressAndHold: show account detail
                 }
 
@@ -81,15 +80,14 @@ Rectangle {
                 }
                 PlasmaQt.QIconItem {
                     id: statusIcon
+                    width: 22; height: 22
+                    anchors {
+                        right: parent.right
+                        rightMargin: 10
+                        verticalCenter: parent.verticalCenter
+                    }
                     icon: presenceIcon
-//                    anchors.right: parent.right
-//                    anchors.rightMargin: 10
-//                    icon: presenceIcon;
-//                    //contactStatus == 1 ? "../../images/user-online.png" : "../../images/user-offline.png"
-//                    anchors.verticalCenter: parent.verticalCenter
-//                    opacity: 1; //contactStatus == 1 ? 1 : 0.2
                 }
-
             }
         }
     }

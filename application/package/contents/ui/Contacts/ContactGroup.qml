@@ -12,10 +12,15 @@ Item {
     property alias name: groupHead.text
     property alias model: groupBody.model
 
+    signal chatRequest(variant account, variant contact);
+//    Component.onCompleted: {
+//        groupBody.contactClicked.connect(startChat);
+//    }
+
     GroupHead {
         id: groupHead
         anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.right: parent.right        
     }
 
     GroupBody {
@@ -24,6 +29,11 @@ Item {
             top: groupHead.bottom
             left: parent.left
             right: parent.right
+        }
+        Connections {
+            target: groupBody
+            onContactClicked: chatRequest(account, contact);
+            ignoreUnknownSignals: true;
         }
     }
 

@@ -25,10 +25,17 @@ Image {
                 }
                 ContactGroup {
                     name: "No offline"
-                    model: contactList1.model
+                    model: contactList1.model                    
                     anchors {
                         left: parent.left
                         right: parent.right
+                    }
+                    onChatRequest: contactList1.startChat(account,contact);
+
+                    //onChatRequest: console.log("test");
+
+                    KtpContactList.ContactList {
+                        id: contactList1
                     }
                 }
                 ContactGroup {
@@ -38,6 +45,7 @@ Image {
                         left: parent.left
                         right: parent.right
                     }
+                    onChatRequest: contactList2.startChat(account,contact);
                 }
                 ContactGroup {
                     name: "All"
@@ -46,14 +54,12 @@ Image {
                         left: parent.left
                         right: parent.right
                     }
+                    onChatRequest: contactList3.startChat(account,contact);
                 }
             }
         }
     }
 
-    KtpContactList.ContactList {
-        id: contactList1
-    }
     KtpContactList.ContactList {
         id: contactList2
     }
@@ -61,14 +67,14 @@ Image {
         id: contactList3
     }
     Component.onCompleted : {
-         contactList1.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
-         contactList1.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.HideAllOffline
+        contactList1.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
+        contactList1.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.HideAllOffline
 
-         contactList2.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
-         contactList2.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.ShowOnlyConnected
+        contactList2.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
+        contactList2.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.ShowOnlyConnected
 
-         contactList3.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
-         contactList3.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.ShowAll
+        contactList3.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
+        contactList3.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.ShowAll
     }
 
 }
