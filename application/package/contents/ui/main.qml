@@ -50,23 +50,60 @@ Image {
 
 //    }
 
-    ChatView {
+    PlasmaComponents.PageStack {
         id: chat
+        initialPage: drawer
         anchors {
             top: toolbar.bottom
             bottom: parent.bottom
             left: contactList.right
             right: parent.right
         }
-        Image {
-            source: "image://appbackgrounds/shadow-right"
-            fillMode: Image.TileVertically
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: parent.left
+    }
+
+//    PlasmaComponents.Page {
+//        id: chatv
+//        anchors.fill: parent
+//        ChatView {
+//            anchors.fill: parent
+//        }
+//    }
+
+    PlasmaMobile.OverlayDrawer {
+        id: drawer
+        anchors.fill: parent
+        width: parent.width
+        ChatView {
+            id: chatv
+            anchors.fill: parent
+//            anchors {
+//                top: toolbar.bottom
+//                bottom: parent.bottom
+//                left: contactList.right
+//                right: parent.right
+//            }
+            Image {
+                source: "image://appbackgrounds/shadow-right"
+                fillMode: Image.TileVertically
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                    left: parent.left
+                }
             }
         }
+
+        Item {
+            id: drawie
+            height: drawer.height
+            implicitWidth: drawer.width * 0.75
+            Item {
+                //implicitWidth: drawer.width * 0.25
+            }
+        }
+
+        page: chatv
+        drawer: drawie
     }
 
     Image {

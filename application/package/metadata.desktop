@@ -1,22 +1,22 @@
 [Desktop Entry]
-Name=Touch Instant Messenger
 Comment=Touchscreen friendly Instant Messenger
-
 Encoding=UTF-8
-Type=Service
 Icon=active-ktp
+Keywords=
+Name=Touch Instant Messenger
+Type=Service
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Artur Debski
+X-KDE-PluginInfo-Category=Online Services
+X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-Email=xmentero@gmail.com
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-Name=org.kde.ktp.active
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=
-X-KDE-PluginInfo-Category=Online Services
-X-KDE-PluginInfo-Depends=
-X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-EnabledByDefault=true
-X-Plasma-MainScript=ui/main.qml
-
-ServiceTypes=Plasma/Applet
+X-KDE-ServiceTypes=Plasma/Applet
 X-Plasma-API=declarativeappletscript
 X-Plasma-DefaultSize=800,600
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-RemoteLocation=

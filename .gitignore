@@ -1,5 +1,5 @@
 *~
 *.user
-
+.plasmateprojectrc
 /playground
 /build
