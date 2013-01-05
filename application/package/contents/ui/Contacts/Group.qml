@@ -67,6 +67,7 @@ Item {
 
                 ContactItemDelegate {
                     id: entry
+                    width: list.width
                     onContactClicked: chatRequest(account, contact)
                 }
             }

@@ -110,17 +110,15 @@ Item {
             id: content
             anchors.fill: parent
             page: chat
-            drawer: dra
+            drawer: activeChats
 
             Chat {
                 id: chat
                 anchors.fill: parent
             }
 
-            Rectangle {
-                id: dra
-                color: "red"
-                opacity: 0
+            ActiveChats {
+                id: activeChats
                 implicitWidth: rightContainer.width * 0.45
                 implicitHeight: rightContainer.height
             }
