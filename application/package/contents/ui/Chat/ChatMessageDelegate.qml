@@ -22,7 +22,7 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
-    width: 100
+    implicitWidth: 100
     height: Math.max(avatar.height, messageBallon.height)
 
     property bool direction: true
@@ -37,32 +37,20 @@ Item {
         LayoutMirroring.enabled: direction
     }
 
-//    Image {
-//        source: direction ? "image://appbackgrounds/shadow-right" : "image://appbackgrounds/shadow-left"
-//        fillMode: Image.TileVertically
-//        anchors {
-//            top: parent.top
-//            bottom: parent.bottom
-//            right: messageBallon.left
-//            rightMargin: -1
-//        }
-//        LayoutMirroring.enabled: direction
-//    }
-
     PlasmaCore.FrameSvgItem {
         id: messageBallon
         width: parent.width - 2*avatar.width - 20
         height: content.height * 1.2
         anchors.horizontalCenter: parent.horizontalCenter
-        imagePath: "dialogs/background"
+        imagePath: "widgets/background"
 
-        Text {
+        PlasmaComponents.Label {
             anchors {
                 top: parent.top
                 left: parent.left
                 margins: 20
             }
-            text: "John Doe writes"
+            text: "John Doe" + i18n(" writes")
         }
 
         Column {
@@ -87,17 +75,17 @@ Item {
                         left: parent.left
                         right: parent.right
                     }
-                    Text {
+                    PlasmaExtras.Heading {
                         id: date
+                        level: 5
                         anchors {
                             //left: parent.left
                             right: parent.right
                         }
                         text: "31.12.2012 10:02"
-                        font.pointSize: 6
                         color: "#666666"
                     }
-                    Text {
+                    PlasmaComponents.Label {
                         anchors {
                             top: date.bottom
                             left: parent.left
@@ -105,11 +93,10 @@ Item {
                             margins: 10
                         }
                         wrapMode: Text.Wrap
+                        textFormat: Text.RichText
                         text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac turpis mi, ac malesuada libero. Morbi aliquam, sapien accumsan lobortis fermentum, turpis massa auctor felis, sit amet luctus lacus tortor et felis. Aenean placerat tincidunt est sit amet rhoncus. Aenean massa tellus, vestibulum sed rutrum ac, ultricies sit amet felis. Fusce at felis nunc, quis fermentum mi. Praesent sed diam."
                     }
                 }
-
-
             }
         }
     }

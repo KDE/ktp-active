@@ -25,8 +25,8 @@ Item {
     id: picker
     state: "presentationMode"
 
-    height: statusField.height
-    width: childrenRect.width
+    implicitHeight: statusTextField.implicitHeight
+    implicitWidth: 300
 
     property string message: ""
     property int selectedTab: 0
@@ -35,8 +35,8 @@ Item {
     Item {
         id: statusField
         state: "statusShow"
-        width: statusTabbar.width
-        height: statusTabbar.height
+        width: parent.width
+        height: parent.height
         anchors {
             verticalCenter: parent.verticalCenter
             left: parent.left
@@ -72,12 +72,26 @@ Item {
             }            
             flat: false
             checkable: false
-            onClicked: picker.state = "selectionMode"
+            //onClicked: picker.state = "selectionMode"
+            MouseArea {
+                id: iconArea
+                height: parent.height
+                width: height
+                onClicked: picker.state = "selectionMode"
+            }
+            MouseArea {
+                id: labelArea
+                anchors.left: iconArea.right
+                height: parent.height
+                width: parent.width - iconArea.width
+                onClicked: picker.state = "editMode"
+            }
         }
 
         // Status chooser
         PlasmaComponents.TabBar {
             id: statusTabbar
+            anchors.fill: parent
             PlasmaComponents.TabButton {
                 id: statusOnline
                 iconSource: "user-online";
@@ -168,16 +182,16 @@ Item {
         PlasmaComponents.ToolButton {
             id: useMessageButton
             iconSource: "view-conversation-balloon"
-            width: statusTabbar.height
-            height: statusTabbar.height
+            width: theme.mediumIconSize
+            height: theme.mediumIconSize
             flat: true
             checkable: true
         }
         PlasmaComponents.ToolButton {
             id: editMessageButton
             iconSource: "text-field"
-            width: statusTabbar.height
-            height: statusTabbar.height
+            width: theme.mediumIconSize
+            height: theme.mediumIconSize
             flat: true
             checkable: false
             onClicked: picker.state = "editMode"
@@ -185,8 +199,8 @@ Item {
         PlasmaComponents.ToolButton {
             id: applyMessageButton
             iconSource: "dialog-ok-apply"
-            width: statusTabbar.height
-            height: statusTabbar.height
+            width: theme.mediumIconSize
+            height: theme.mediumIconSize
             flat: true
             checkable: false
             onClicked: picker.state = "presentationMode"
@@ -232,7 +246,7 @@ Item {
         State {
             name: "selectionMode"
             PropertyChanges { target: statusField;      state: "statusSelect" }
-            PropertyChanges { target: optionsField;     state: "messageEdit" }
+            PropertyChanges { target: optionsField;     state: "messageUse" }
         },
         State {
             name: "editMode"

@@ -23,32 +23,21 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.telepathy.chat 0.1 as KtpChat
 
 Item {
-    property alias header: chatHeader.text
+    id: chatRoot
 
     Column {
+        id: content
         anchors.fill: parent
         anchors.margins: 15
         spacing: 10
         ChatToolbar {
             id: chatToolbar
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-        }
-
-        Text {
-            id: chatHeader
-            text: "Default header (test purpose)"
-            font.pointSize: 10
+            width: parent.width
         }
 
         PlasmaExtras.ScrollArea {
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
-            height: parent.height - chatToolbar.height - chatInput.height - chatHeader.height
+            width: chatRoot.width - content.anchors.margins*2
+            height: parent.height - chatToolbar.height - chatInput.height
             Flickable {
                 anchors.fill: parent
                 flickableDirection: Flickable.VerticalFlick
@@ -57,30 +46,18 @@ Item {
                 Column {
                     id: list
                     spacing: 4
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
+                    width: parent.width
                     ChatMessageDelegate {
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                        }
+                        width: parent.width
                         direction: true
                     }
                     ChatMessageDelegate {
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                        }
                         direction: false
+                        width: parent.width
                     }
                     ChatMessageDelegate {
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                        }
                         direction: true
+                        width: parent.width
                     }
                 }
             }

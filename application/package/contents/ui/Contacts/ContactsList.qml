@@ -41,7 +41,7 @@ Image {
                     left: parent.left
                     right: parent.right
                 }
-                ContactGroup {
+                Group {
                     name: "No offline"
                     model: contactList1.model                    
                     anchors {
@@ -56,7 +56,7 @@ Image {
                         id: contactList1
                     }
                 }
-                ContactGroup {
+                Group {
                     name: "Only connected"
                     model: contactList2.model
                     anchors {
@@ -65,7 +65,7 @@ Image {
                     }
                     onChatRequest: contactList2.startChat(account,contact);
                 }
-                ContactGroup {
+                Group {
                     name: "All"
                     model: contactList3.model
                     anchors {

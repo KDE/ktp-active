@@ -23,47 +23,46 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 
 Item {
     id: toolbarRoot
-    height: toolbar.height
+    implicitHeight: toolbar.height
 
     PlasmaComponents.ToolBar {
         id: toolbar
         tools: layout
-        height: layout.height
-        anchors.verticalCenter: parent.verticalCenter
+        height: Math.ceil(theme.mediumIconSize)
 
         PlasmaComponents.ToolBarLayout {
             id: layout
             height: childrenRect.height
-
+            anchors.verticalCenter: parent.verticalCenter
             PlasmaComponents.ToolButton {
                 id: audioCall
                 iconSource: "audio-headset"
                 text: "Audio call"
-                height: theme.toolbarIconSize
+                height: theme.mediumIconSize
             }
             PlasmaComponents.ToolButton {
                 id: videoCall
                 iconSource: "camera-web"
                 text: "Video call"
-                height: theme.toolbarIconSize
+                height: theme.mediumIconSize
             }
             PlasmaComponents.ToolButton {
                 id: logView
                 iconSource: "view-pim-journal"
                 text: "View logs"
-                height: theme.toolbarIconSize
+                height: theme.mediumIconSize
             }
             PlasmaComponents.ToolButton {
                 id: blockUser
                 iconSource: "im-ban-user"
                 text: "Block user"
-                height: theme.toolbarIconSize
+                height: theme.mediumIconSize
             }
             PlasmaComponents.ToolButton {
                 id: exitChat
                 iconSource: "dialog-close"
                 text: "End chat"
-                height: theme.toolbarIconSize
+                height: theme.mediumIconSize
             }
         }
     }
