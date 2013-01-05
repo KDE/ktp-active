@@ -28,30 +28,48 @@ Item {
     state: groupHead.expanded ? "unrolled" : "rolled"
 
     property alias name: groupHead.text
-    property alias model: groupBody.model
+    property alias model: list.model
 
     signal chatRequest(variant account, variant contact);
 //    Component.onCompleted: {
 //        groupBody.contactClicked.connect(startChat);
 //    }
 
-    GroupHead {
+    GroupHeaderDelegate {
         id: groupHead
         anchors.left: parent.left
         anchors.right: parent.right        
     }
 
-    GroupBody {
+    Rectangle {
         id: groupBody
+        height: groupData.height
         anchors {
             top: groupHead.bottom
             left: parent.left
             right: parent.right
         }
-        Connections {
-            target: groupBody
-            onContactClicked: chatRequest(account, contact);
-            ignoreUnknownSignals: true;
+
+        Column {
+            id: groupData
+            spacing: 2
+            anchors {
+                topMargin: 2
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
+            width: parent.width
+
+            Repeater {
+                id: list
+                width: parent.width
+
+                ContactItemDelegate {
+                    id: entry
+                    onContactClicked: chatRequest(account, contact)
+                }
+            }
         }
     }
 

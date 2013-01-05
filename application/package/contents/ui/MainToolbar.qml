@@ -21,9 +21,12 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 
+import "Toolbar"
+
 Item {
     id: layout
-    height: Math.max(settingsButton.height, picker.height)
+    implicitHeight: Math.max(settingsButton.height, picker.height)
+    implicitWidth: 100
 
     property alias settingsChecked: settingsButton.checked
     property alias activeChatsChecked: notificationNewMessage.checked
@@ -33,15 +36,18 @@ Item {
         width: theme.mediumIconSize
         height: theme.mediumIconSize
         anchors.verticalCenter: parent.verticalCenter
-
         iconSource: "format-justify-fill"
         flat: false
         checkable: true
         checked: true
+
+        Component.onCompleted:iconSource = "format-justify-fill"
     }
 
     StatusPicker {
         id: picker
+        height: Math.round(theme.mediumIconSize * 1.1)
+        width: Math.round(parent.width * 0.4)
         anchors {
             verticalCenter: parent.verticalCenter
             left: settingsButton.right
@@ -51,24 +57,24 @@ Item {
 
     PlasmaComponents.ToolButton {
         id: notificationFriendIsWriting
+        width: theme.mediumIconSize
+        height: theme.mediumIconSize
         enabled: false
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: notificationNewMessage.left
         iconSource: "document-edit"
-        width: theme.largeIconSize
-        height: theme.largeIconSize
     }
 
     PlasmaComponents.ToolButton {
         id: notificationNewMessage
+        width: theme.mediumIconSize
+        height: theme.mediumIconSize
         enabled: true
-        checkable: true
+        checkable: false
         checked: false
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
         iconSource: "mail-unread-new"
-        width: theme.largeIconSize
-        height: theme.largeIconSize
     }
 }
 

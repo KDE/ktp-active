@@ -25,7 +25,7 @@ import org.kde.draganddrop 1.0
 import org.kde.qtextracomponents 0.1
 
 Item {
-    id: rootToolbar
+    //id: rootToolbar
     height: toolbarMenu.height
 
     state: "DEFAULT"

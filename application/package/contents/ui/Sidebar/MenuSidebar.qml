@@ -22,11 +22,10 @@ import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as PlasmaMobile
 
-Image {
+Item {
     id: sidebarRoot
     state: "shown"
-    source: "image://appbackgrounds/contextarea"
-    fillMode: Image.Tile
+
     width: menuColumn.width
     anchors {
         top: parent.top
@@ -40,11 +39,10 @@ Image {
     signal removeGroupClicked;
     signal accountsClicked;
 
-
-    PlasmaComponents.ButtonColumn {
+    Column {
         id: menuColumn
         width: theme.largeIconSize
-        exclusive: false
+        //exclusive: false
         spacing: 10
         anchors {
             top: parent.top
@@ -111,11 +109,14 @@ Image {
 
     transitions: [
         Transition {
-            ParallelAnimation {
-                NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 600  }
-                NumberAnimation { properties: "width"; easing.type: Easing.InOutQuad; duration: 300  }
-
-            }
+            from: "shown"; to: "hidden"
+            NumberAnimation { properties: "width"; easing.type: Easing.InOutQuad; duration: 300  }
+            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 100  }
+        },
+        Transition {
+            from: "hidden"; to: "shown"
+            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 100  }
+            NumberAnimation { properties: "width"; easing.type: Easing.InOutQuad; duration: 300  }
         }
     ]
 }

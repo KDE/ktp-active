@@ -1,7 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011 Sebastian Kügler <sebas@kde.org>                       *
- *   Copyright 2011 Marco Martin <mart@kde.org>                            *
+ *   Copyright 2012 Artur Dębski <xmentero@gmail.com>                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,7 +17,6 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
-
 
 #ifndef ACTIVEIM_H
 #define ACTIVEIM_H
