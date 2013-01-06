@@ -27,6 +27,10 @@ Image {
     source: "image://appbackgrounds/standard"
     fillMode: Image.Tile
 
+    KtpContactList.ContactList {
+        id: contactList
+    }
+
     PlasmaExtras.ScrollArea {
         anchors.fill: parent
         Flickable {
@@ -35,64 +39,28 @@ Image {
             clip: true
             contentHeight: list.height
             Column {
-                id: list                
+                id: list
                 spacing: 4
                 anchors {
                     left: parent.left
                     right: parent.right
                 }
                 Group {
-                    name: "No offline"
-                    model: contactList1.model                    
+                    name: "All contacts"
+                    model: contactList.model
                     anchors {
                         left: parent.left
                         right: parent.right
                     }
-                    onChatRequest: contactList1.startChat(account,contact);
-
-                    //onChatRequest: console.log("test");
-
-                    KtpContactList.ContactList {
-                        id: contactList1
-                    }
-                }
-                Group {
-                    name: "Only connected"
-                    model: contactList2.model
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
-                    onChatRequest: contactList2.startChat(account,contact);
-                }
-                Group {
-                    name: "All"
-                    model: contactList3.model
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
-                    onChatRequest: contactList3.startChat(account,contact);
+                    onChatRequest: contactList.startChat(account,contact);
                 }
             }
         }
     }
 
-    KtpContactList.ContactList {
-        id: contactList2
-    }
-    KtpContactList.ContactList {
-        id: contactList3
-    }
     Component.onCompleted : {
-        contactList1.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
-        contactList1.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.HideAllOffline
-
-        contactList2.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
-        contactList2.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.ShowOnlyConnected
-
-        contactList3.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
-        contactList3.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.ShowAll
+        contactList.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
+        contactList.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.ShowAll
     }
 
 }

@@ -62,7 +62,7 @@ Item {
             elementId: "border-left"
             width: naturalSize.width
             height: sidebar.height
-            opacity: sidebarOpen ? 1 : 0
+            opacity: sidebarOpen ? 0.6 : 0
             Behavior on opacity {
                 NumberAnimation {
                     duration: 250
