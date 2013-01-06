@@ -110,13 +110,17 @@ Item {
     transitions: [
         Transition {
             from: "shown"; to: "hidden"
-            NumberAnimation { properties: "width"; easing.type: Easing.InOutQuad; duration: 300  }
-            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 100  }
+            SequentialAnimation {
+                NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300  }
+                NumberAnimation { properties: "width"; easing.type: Easing.InOutQuad; duration: 100  }
+            }
         },
         Transition {
             from: "hidden"; to: "shown"
-            NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 100  }
-            NumberAnimation { properties: "width"; easing.type: Easing.InOutQuad; duration: 300  }
+            SequentialAnimation {
+                NumberAnimation { properties: "width"; easing.type: Easing.InOutQuad; duration: 100  }
+                NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 300  }
+            }
         }
     ]
 }

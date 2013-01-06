@@ -25,9 +25,10 @@ import org.kde.qtextracomponents 0.1 as PlasmaQt
 Rectangle {
     id: signleEntry
     height: contactAvatar.height + 10
-    width: parent.width
     border.color: "#cccccc"
     gradient: regularGradient
+
+    implicitWidth: 200
 
     signal contactClicked(variant account, variant contact)
 
