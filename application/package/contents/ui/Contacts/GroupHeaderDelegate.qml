@@ -21,53 +21,50 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
 
-Rectangle {
+PlasmaComponents.ListItem {
     id: groupHeadRoot
-    height: 45
-    border.color: "#cccccc"
+    implicitHeight: arrowsButton.height;
+    sectionDelegate: true
+    enabled: true
 
     property alias text: groupLabel.text
     property bool  expanded: true
 
-    Gradient {
-        id: regularGradient
-        GradientStop { position: 0.0; color: "#dddddd" }
-        GradientStop { position: 0.85; color: "#cccccc" }
-        GradientStop { position: 1.0; color: "#bbbbbb" }
+
+    PlasmaCore.Svg {
+        id: arrows
+        imagePath: "widgets/arrows"
     }
 
-    Gradient {
-        id: highlightGradient
-        GradientStop { position: 0.0; color: "#bbbbbb" }
-        GradientStop { position: 0.85; color: "#cccccc" }
-        GradientStop { position: 1.0; color: "#dddddd" }
-    }
+    Row {
+        id: groupLayout
+        width: groupHeadRoot.width - 15
+        PlasmaCore.SvgItem {
+            id: arrowsButton
+            svg: arrows
+            elementId: expanded ? "down-arrow" : "right-arrow"
+            width: theme.mediumIconSize
+            height: theme.mediumIconSize
+            anchors.verticalCenter: parent.verticalCenter
+        }
 
-    gradient: expanded ? regularGradient : highlightGradient
+        PlasmaComponents.Label {
+            id: groupLabel
+            width: groupLayout.width - arrowsButton.width - groupCount.width
+            anchors.verticalCenter: parent.verticalCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.weight: Font.Bold
+            text: "No name group"
+        }
 
-    Image {
-        id: arrowIcon
-        source: expanded ? "../../images/arrow-down.png" : "../../images/arrow-right.png"
-        width: theme.smallIconSize
-        height: theme.smallIconSize
-        anchors {
-            left: parent.left
-            leftMargin: 20
-            verticalCenter: parent.verticalCenter
+        PlasmaComponents.Label {
+            id: groupCount
+            anchors.verticalCenter: parent.verticalCenter
+            font.weight: Font.Bold
+            text: "(4/10)"
         }
     }
 
-    PlasmaComponents.Label {
-        id: groupLabel
-        anchors.centerIn: parent
-        anchors.margins: 10
-        font.weight: Font.Bold
-        text: "No name group"
-    }
 
-    MouseArea {
-        anchors.fill: parent
-        hoverEnabled: false
-        onClicked: groupHeadRoot.expanded = !groupHeadRoot.expanded
-    }
+    onClicked: groupHeadRoot.expanded = !groupHeadRoot.expanded
 }

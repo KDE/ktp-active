@@ -31,17 +31,14 @@ Item {
     property alias model: list.model
 
     signal chatRequest(variant account, variant contact);
-//    Component.onCompleted: {
-//        groupBody.contactClicked.connect(startChat);
-//    }
 
     GroupHeaderDelegate {
         id: groupHead
         anchors.left: parent.left
-        anchors.right: parent.right        
+        anchors.right: parent.right
     }
 
-    Rectangle {
+    Item {
         id: groupBody
         height: groupData.height
         anchors {
@@ -52,7 +49,7 @@ Item {
 
         Column {
             id: groupData
-            spacing: 2
+            spacing: 1
             anchors {
                 topMargin: 2
                 top: parent.top
@@ -118,68 +115,4 @@ Item {
             }
         }
     ]
-
-    ListModel {
-        id: testModel
-        ListElement {
-            contactName: "John Doe"
-            contactAvatar: "../../images/im-user.png"
-            contactStatus: 1
-        }
-        ListElement {
-            contactName: "Scooby Doo"
-            contactAvatar: "../../images/im-user-offline.png"
-            contactStatus: 1
-        }
-        ListElement {
-            contactName: "Donkey Kong"
-            contactAvatar: "../../images/im-user-away.png"
-            contactStatus: 1
-        }
-        ListElement {
-            contactName: "John Doe"
-            contactAvatar: "../../images/im-user.png"
-            contactStatus: 1
-        }
-        ListElement {
-            contactName: "Scooby Doo"
-            contactAvatar: "../../images/im-user-offline.png"
-            contactStatus: 2
-        }
-        ListElement {
-            contactName: "Donkey Kong"
-            contactAvatar: "../../images/im-user-away.png"
-            contactStatus: 2
-        }
-        ListElement {
-            contactName: "John Doe"
-            contactAvatar: "../../images/im-user.png"
-            contactStatus: 2
-        }
-        ListElement {
-            contactName: "Scooby Doo"
-            contactAvatar: "../../images/im-user-offline.png"
-            contactStatus: 1
-        }
-        ListElement {
-            contactName: "Donkey Kong"
-            contactAvatar: "../../images/im-user-away.png"
-            contactStatus: 1
-        }
-        ListElement {
-            contactName: "John Doe"
-            contactAvatar: "../../images/im-user.png"
-            contactStatus: 2
-        }
-        ListElement {
-            contactName: "Scooby Doo"
-            contactAvatar: "../../images/im-user-offline.png"
-            contactStatus: 2
-        }
-        ListElement {
-            contactName: "Donkey Kong"
-            contactAvatar: "../../images/im-user-away.png"
-            contactStatus: 1
-        }
-    }
 }
