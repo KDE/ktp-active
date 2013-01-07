@@ -30,6 +30,9 @@ PlasmaComponents.ListItem {
     property alias text: groupLabel.text
     property bool  expanded: true
 
+    property int contactsInGroup: 0
+    property int contactsAvailable: 0
+
 
     PlasmaCore.Svg {
         id: arrows
@@ -61,7 +64,7 @@ PlasmaComponents.ListItem {
             id: groupCount
             anchors.verticalCenter: parent.verticalCenter
             font.weight: Font.Bold
-            text: "(4/10)"
+            text: "(" + contactsAvailable + "/" + contactsInGroup + ")"
         }
     }
 
