@@ -31,6 +31,11 @@ Image {
         id: contactList
     }
 
+    // For online contacts (hack)
+    KtpContactList.ContactList {
+        id: contactList1
+    }
+
     PlasmaExtras.ScrollArea {
         anchors.fill: parent
         Flickable {
@@ -48,6 +53,8 @@ Image {
                 Group {
                     name: "All contacts"
                     model: contactList.model
+                    contactsInGroup: contactList.model.rowCount
+                    contactsAvailable: contactList1.model.rowCount
                     anchors {
                         left: parent.left
                         right: parent.right
@@ -59,8 +66,10 @@ Image {
     }
 
     Component.onCompleted : {
-        contactList.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
         contactList.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.ShowAll
+        contactList.filter.sortMode = KtpContactList.AccountsFilterModel.SortByPresence;
+
+        contactList1.filter.presenceTypeFilterFlags = KtpContactList.AccountsFilterModel.ShowOnlyConnected
     }
 
 }

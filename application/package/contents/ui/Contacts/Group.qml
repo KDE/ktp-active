@@ -30,6 +30,9 @@ Item {
     property alias name: groupHead.text
     property alias model: list.model
 
+    property alias contactsInGroup: groupHead.contactsInGroup
+    property alias contactsAvailable: groupHead.contactsAvailable
+
     signal chatRequest(variant account, variant contact);
 
     GroupHeaderDelegate {

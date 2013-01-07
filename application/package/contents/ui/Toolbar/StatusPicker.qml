@@ -20,6 +20,7 @@ import QtQuick 1.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
+import org.kde.telepathy 0.1 as Ktp
 
 Item {
     id: picker
@@ -43,33 +44,16 @@ Item {
             leftMargin: 10
         }
 
+        Ktp.PresenceManager {
+            id: presenceManager
+        }
+
         // Status presentation
         PlasmaComponents.ToolButton {
             id: statusViewer
             anchors.fill: parent
-            text: message != "" ? message : i18n("Status message will be here")
-            iconSource: {
-                switch(selectedTab) {
-                        case 0:
-                            "user-online"
-                            break;
-                        case 1:
-                            "user-away"
-                            break;
-                        case 2:
-                            "user-busy"
-                            break;
-                        case 3:
-                            "user-invisible"
-                            break;
-                        case 4:
-                            "user-offline"
-                            break;
-                        default:
-                            "user-online"
-                            break;
-                        }
-            }            
+            text: presenceManager.message
+            iconSource: presenceManager.iconName
             flat: false
             checkable: false
             //onClicked: picker.state = "selectionMode"
@@ -97,6 +81,7 @@ Item {
                 iconSource: "user-online";
                 text: "Online"
                 onClicked: {
+                    presenceManager.setPresence(Ktp.PresenceManager.Online)
                     selectedTab = 0
                     picker.state = "presentationMode"
                     PlasmaExtras.ReleasedAnimation
@@ -106,25 +91,31 @@ Item {
                 id: statusAway
                 iconSource: "user-away"
                 text: "Away"
-                onClicked: { selectedTab = 1; picker.state = "presentationMode"; }
+                onClicked: { presenceManager.setPresence(Ktp.PresenceManager.Away); selectedTab = 1; picker.state = "presentationMode"; }
+            }
+            PlasmaComponents.TabButton {
+                id: statusAwayExtended
+                iconSource: "user-away-extended"
+                text: "Not Available"
+                onClicked: { presenceManager.setPresence(Ktp.PresenceManager.ExtendedAway); selectedTab = 2; picker.state = "presentationMode"; }
             }
             PlasmaComponents.TabButton {
                 id: statusBusy
                 iconSource: "user-busy"
                 text: "Busy"
-                onClicked: { selectedTab = 2; picker.state = "presentationMode"; }
+                onClicked: { presenceManager.setPresence(Ktp.PresenceManager.Busy); selectedTab = 3; picker.state = "presentationMode"; }
             }
             PlasmaComponents.TabButton {
-                id: statusInvisible
+                id: statusHidden
                 iconSource: "user-invisible"
                 text: "Invisible"
-                onClicked: { selectedTab = 3; picker.state = "presentationMode"; }
+                onClicked: { presenceManager.setPresence(Ktp.PresenceManager.Hidden); selectedTab = 4; picker.state = "presentationMode"; }
             }
             PlasmaComponents.TabButton {
                 id: statusOffline
                 iconSource: "user-offline"
                 text: "Offline"
-                onClicked: { selectedTab = 4; picker.state = "presentationMode"; }
+                onClicked: { presenceManager.setPresence(Ktp.PresenceManager.Offline); selectedTab = 5; picker.state = "presentationMode"; }
             }
         }
 

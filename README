@@ -9,7 +9,10 @@ make
 sudo make install
 
 
-Note: 
+Note #1:
+KTp Active require ktp-common-internals on move_plasma branch with patch from "Declarative" folder.
+
+Note #2: 
 Im using kdeclarativeview and kdeclarativemainwindow borrowed from
 Plasma Active from 
 https://projects.kde.org/projects/extragear/base/plasma-mobile/repository/revisions/master/show/applications/common
