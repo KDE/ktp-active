@@ -50,7 +50,7 @@ Item {
                 left: parent.left
                 margins: 20
             }
-            text: "John Doe" + i18n(" writes")
+            text: i18nc("%1 = nick", "%1 writes", "John Doe")
         }
 
         Column {
