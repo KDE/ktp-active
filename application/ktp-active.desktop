@@ -1,7 +1,25 @@
 [Desktop Entry]
 Name=KTp
+Name[cs]=KTp
+Name[it]=KTp
+Name[pt]=KTp
+Name[sv]=KTP
+Name[uk]=KTp
+Name[x-test]=xxKTpxx
 GenericName=KDE Telepathy
+GenericName[cs]=KDE Telepathy
+GenericName[it]=Telepathy KDE
+GenericName[pt]=Telepathy do KDE
+GenericName[sv]=KDE Telepathy
+GenericName[uk]=KDE Telepathy
+GenericName[x-test]=xxKDE Telepathyxx
 Comment=Instant Messenger for Plasma Active
+Comment[cs]=Komunikátor pro Plasma Active
+Comment[it]=Messaggistica istantanea per Plasma Active
+Comment[pt]=Mensageiro Instantâneo para o Plasma Active
+Comment[sv]=Direktmeddelanden för Plasma Aktiv
+Comment[uk]=Програма миттєвого зв’язку для портативної Плазми
+Comment[x-test]=xxInstant Messenger for Plasma Activexx
 
 Exec=ktp-active -graphicssystem raster %u
 Terminal=false

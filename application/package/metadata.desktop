@@ -1,9 +1,17 @@
 [Desktop Entry]
 Comment=Touchscreen friendly Instant Messenger
+Comment[pt]=Mensageiro instantâneo amigável para ecrãs por toque
+Comment[sv]=Pekskärmsvänligt direktmeddelandeverktyg
+Comment[uk]=Програма миттєвого зв’язку для сенсорних пристроїв
+Comment[x-test]=xxTouchscreen friendly Instant Messengerxx
 Encoding=UTF-8
 Icon=active-ktp
 Keywords=
 Name=Touch Instant Messenger
+Name[pt]=Mensageiro Instantâneo por Toque
+Name[sv]=Direktmeddelandeverktyg för pekskärm
+Name[uk]=Сенсорна програма миттєвого зв'язку
+Name[x-test]=xxTouch Instant Messengerxx
 Type=Service
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Artur Debski
