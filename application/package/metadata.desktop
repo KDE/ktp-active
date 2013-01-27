@@ -2,6 +2,7 @@
 Comment=Touchscreen friendly Instant Messenger
 Comment[pt]=Mensageiro instantâneo amigável para ecrãs por toque
 Comment[pt_BR]=Mensageiro instantâneo amigável para telas sensível ao toque
+Comment[sk]=Instant messenger priateľský s dotykovými obrazovkami
 Comment[sv]=Pekskärmsvänligt direktmeddelandeverktyg
 Comment[uk]=Програма миттєвого зв’язку для сенсорних пристроїв
 Comment[x-test]=xxTouchscreen friendly Instant Messengerxx
@@ -11,6 +12,7 @@ Keywords=
 Name=Touch Instant Messenger
 Name[pt]=Mensageiro Instantâneo por Toque
 Name[pt_BR]=Mensageiro instantâneo para telas sensível ao toque
+Name[sk]=Dotykový instant messenger
 Name[sv]=Direktmeddelandeverktyg för pekskärm
 Name[uk]=Сенсорна програма миттєвого зв'язку
 Name[x-test]=xxTouch Instant Messengerxx
