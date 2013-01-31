@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Touchscreen friendly Instant Messenger
+Comment[cs]=Komunikátor uzpůsobený pro dotykové obrazovky
 Comment[nl]=Instant-messenger die vriendelijk is voor aanraakschermen
 Comment[pt]=Mensageiro instantâneo amigável para ecrãs por toque
 Comment[pt_BR]=Mensageiro instantâneo amigável para telas sensível ao toque
@@ -11,6 +12,7 @@ Encoding=UTF-8
 Icon=active-ktp
 Keywords=
 Name=Touch Instant Messenger
+Name[cs]=Dotykový Komunikátor
 Name[nl]=Instant messenger voor aanraken
 Name[pt]=Mensageiro Instantâneo por Toque
 Name[pt_BR]=Mensageiro instantâneo para telas sensível ao toque
