@@ -55,7 +55,7 @@ PlasmaComponents.ListItem {
             width: contactLayout.width - contactAvatar.width - statusIcon.width - contactLayout.spacing*2
             anchors.verticalCenter: contactAvatar.verticalCenter
             font.weight: Font.Bold
-            text: "My friend #" + index //aliasName
+            text: model.display
             elide: Text.ElideRight
         }
 
