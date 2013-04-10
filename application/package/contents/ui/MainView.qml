@@ -32,7 +32,7 @@ Item {
     implicitWidth: 100
     implicitHeight: 100
 
-    property bool sidebarOpen: true
+    property bool sidebarOpen: false
 
     // Left container contains contacts list and leftside menu
     Image {
