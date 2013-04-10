@@ -44,16 +44,16 @@ Item {
             leftMargin: 10
         }
 
-        Ktp.PresenceManager {
-            id: presenceManager
-        }
+//         Ktp.PresenceManager {
+//             id: presenceManager
+//         }
 
         // Status presentation
         PlasmaComponents.ToolButton {
             id: statusViewer
             anchors.fill: parent
-            text: presenceManager.message
-            iconSource: presenceManager.iconName
+//             text: presenceManager.message
+//             iconSource: presenceManager.iconName
             flat: false
             checkable: false
             //onClicked: picker.state = "selectionMode"
