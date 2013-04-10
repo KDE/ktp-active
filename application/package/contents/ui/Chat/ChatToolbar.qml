@@ -39,30 +39,35 @@ Item {
                 iconSource: "audio-headset"
                 text: "Audio call"
                 height: theme.mediumIconSize
+                enabled: false
             }
             PlasmaComponents.ToolButton {
                 id: videoCall
                 iconSource: "camera-web"
                 text: "Video call"
                 height: theme.mediumIconSize
+                enabled: false
             }
             PlasmaComponents.ToolButton {
                 id: logView
                 iconSource: "view-pim-journal"
                 text: "View logs"
                 height: theme.mediumIconSize
+                enabled: false
             }
             PlasmaComponents.ToolButton {
                 id: blockUser
                 iconSource: "im-ban-user"
                 text: "Block user"
                 height: theme.mediumIconSize
+                enabled: false
             }
             PlasmaComponents.ToolButton {
                 id: exitChat
                 iconSource: "dialog-close"
                 text: "End chat"
                 height: theme.mediumIconSize
+                enabled: false
             }
         }
     }
