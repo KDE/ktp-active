@@ -24,11 +24,17 @@ import org.kde.telepathy 0.1 as KTp
 
 Image {
     id: rootContactView
+    property variant nastyHack
     source: "image://appbackgrounds/standard"
     fillMode: Image.Tile
 
+
     KTp.ContactList {
         id: contactList
+    }
+
+    KTp.DeclarativeKTpActions {
+        id: actions
     }
 
     PlasmaExtras.ScrollArea {
@@ -53,7 +59,8 @@ Image {
                         left: parent.left
                         right: parent.right
                     }
-                    onChatRequest: contactList.startChat(account,contact);
+
+                    onChatRequest: actions.startChat(account,contact);
                 }
             }
         }

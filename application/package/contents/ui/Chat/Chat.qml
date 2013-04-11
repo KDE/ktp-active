@@ -25,6 +25,8 @@ import org.kde.telepathy 0.1 as KTp
 Item {
     id: chatRoot
 
+    property variant conversation: model.conversation
+
     Column {
         id: content
         anchors.fill: parent
@@ -39,6 +41,7 @@ Item {
             width: chatRoot.width - content.anchors.margins*2
             height: parent.height - chatToolbar.height - chatInput.height
             Flickable {
+                id: flickable
                 anchors.fill: parent
                 flickableDirection: Flickable.VerticalFlick
                 clip: true
@@ -47,17 +50,12 @@ Item {
                     id: list
                     spacing: 4
                     width: parent.width
-                    ChatMessageDelegate {
-                        width: parent.width
-                        direction: true
-                    }
-                    ChatMessageDelegate {
-                        direction: false
-                        width: parent.width
-                    }
-                    ChatMessageDelegate {
-                        direction: true
-                        width: parent.width
+                    Repeater {
+                        model: conversation.messages
+                        delegate: ChatMessageDelegate {
+                            width: flickable.width
+                            direction: true
+                        }
                     }
                 }
             }
@@ -79,14 +77,20 @@ Item {
                 }
                 source: "../../images/im-user.png"
             }
-            PlasmaComponents.TextArea {
+            PlasmaComponents.TextField {
                 id: textArea
+                focus: true
                 anchors {
                     top: parent.top
                     bottom: parent.bottom
                     left: avatar.right
                     right: parent.right
                     bottomMargin: 10
+                }
+                onAccepted: {
+                    console.log("ASDFASDFASDF");
+                    conversation.messages.sendNewMessage(text);
+                    text = "";
                 }
             }
         }

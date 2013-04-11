@@ -111,8 +111,9 @@ Item {
             anchors.fill: parent
             page: chat
             drawer: activeChats
+            visible: false
 
-            Chat {
+            ChatContainer {
                 id: chat
                 anchors.fill: parent
             }

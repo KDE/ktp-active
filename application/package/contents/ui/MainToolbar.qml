@@ -42,6 +42,7 @@ Item {
 //        checked: true
 
 //        Component.onCompleted:iconSource = "format-justify-fill"
+//        visible: false //hidden whilst none of the icons work
 //    }
 
     StatusPicker {

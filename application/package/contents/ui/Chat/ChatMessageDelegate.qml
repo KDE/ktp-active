@@ -50,7 +50,7 @@ Item {
                 left: parent.left
                 margins: 20
             }
-            text: i18nc("%1 = nick", "%1 writes", "John Doe")
+            text: i18nc("%1 = nick", "%1 writes", model.user)
         }
 
         Column {
@@ -62,12 +62,12 @@ Item {
                 verticalCenter: parent.verticalCenter
             }
             //spacing: 5
-            Repeater {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                model: 3
+//            Repeater {
+//                anchors {
+//                    left: parent.left
+//                    right: parent.right
+//                }
+//                model: 3
                 Item {
                     id: msg
                     height: childrenRect.height * 1.1
@@ -82,7 +82,7 @@ Item {
                             //left: parent.left
                             right: parent.right
                         }
-                        text: "31.12.2012 10:02"
+                        text: model.date
                         color: "#666666"
                     }
                     PlasmaComponents.Label {
@@ -94,10 +94,10 @@ Item {
                         }
                         wrapMode: Text.Wrap
                         textFormat: Text.RichText
-                        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac turpis mi, ac malesuada libero. Morbi aliquam, sapien accumsan lobortis fermentum, turpis massa auctor felis, sit amet luctus lacus tortor et felis. Aenean placerat tincidunt est sit amet rhoncus. Aenean massa tellus, vestibulum sed rutrum ac, ultricies sit amet felis. Fusce at felis nunc, quis fermentum mi. Praesent sed diam."
+                        text: model.text
                     }
                 }
-            }
+//            }
         }
     }
 }
