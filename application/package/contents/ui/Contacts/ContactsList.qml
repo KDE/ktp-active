@@ -24,18 +24,8 @@ import org.kde.telepathy 0.1 as KTp
 
 Image {
     id: rootContactView
-    property variant nastyHack
     source: "image://appbackgrounds/standard"
     fillMode: Image.Tile
-
-
-    KTp.ContactList {
-        id: contactList
-    }
-
-    KTp.DeclarativeKTpActions {
-        id: actions
-    }
 
     PlasmaExtras.ScrollArea {
         anchors.fill: parent
@@ -53,22 +43,21 @@ Image {
                 }
                 Group {
                     name: "All contacts"
-                    model: contactList.model
-                    contactsInGroup: contactList.model.rowCount
+                    model: KTp.ContactsModel {
+                        id: contactList
+                        accountManager: telepathyManager.accountManager;
+                        presenceTypeFilterFlags: KTp.ContactsModel.HideAllOffline;
+                        sortRoleString: sortRoleString = "presenceType";
+                    }
+                    contactsInGroup: contactList.rowCount
                     anchors {
                         left: parent.left
                         right: parent.right
                     }
 
-                    onChatRequest: actions.startChat(account,contact);
+                    onChatRequest: telepathyManager.startChat(account,contact, "org.freedesktop.Telepathy.Client.KTp.active");
                 }
             }
         }
     }
-
-    Component.onCompleted : {
-        contactList.model.presenceTypeFilterFlags = KTp.AccountsFilterModel.HideAllOffline;
-        contactList.model.sortRoleString = "presenceType";
-    }
-
 }

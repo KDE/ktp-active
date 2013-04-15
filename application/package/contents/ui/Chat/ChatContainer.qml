@@ -8,15 +8,18 @@ PlasmaComponents.TabGroup
     id: root
 
     Row {
-        KTp.TelepathyTextObserver {
-            id: handler
-        }
-
         Repeater {
-            model: handler.conversations
-            Chat {
+            model: KTp.ConversationsModel {
+                id: conversationsModel
+            }
+
+            delegate: Chat {
                 anchors.fill: parent
             }
         }
+    }
+
+    Component.onCompleted: {
+        telepathyManager.registerClient(conversationsModel, "KTp.active");
     }
 }
