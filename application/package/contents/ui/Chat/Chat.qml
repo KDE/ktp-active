@@ -88,7 +88,6 @@ Item {
                     bottomMargin: 10
                 }
                 onAccepted: {
-                    console.log("ASDFASDFASDF");
                     conversation.messages.sendNewMessage(text);
                     text = "";
                 }

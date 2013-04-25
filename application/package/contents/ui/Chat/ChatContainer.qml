@@ -8,6 +8,7 @@ PlasmaComponents.TabGroup
     id: root
 
     Row {
+        anchors.fill: parent
         Repeater {
             model: KTp.ConversationsModel {
                 id: conversationsModel

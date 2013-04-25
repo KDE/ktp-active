@@ -20,6 +20,7 @@ import QtQuick 1.1
 import org.kde.plasma.components 0.1 as PlasmaComponents
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.extras 0.1 as PlasmaExtras
+import org.kde.qtextracomponents 0.1 as ExtraComponents
 
 Item {
     implicitWidth: 100
@@ -27,50 +28,56 @@ Item {
 
     property bool direction: true
 
-    Image {
+    ExtraComponents.QPixmapItem {
         id: avatar
         anchors {
             right: parent.right
             verticalCenter: parent.verticalCenter
         }
-        source: "../../images/im-user.png"
+        pixmap: model.senderAvatar
+        fillMode: ExtraComponents.QPixmapItem.PreserveAspectFit
         LayoutMirroring.enabled: direction
+        width: 40
+        height: 40
     }
 
-    PlasmaCore.FrameSvgItem {
+    Bubble {
         id: messageBallon
         width: parent.width - 2*avatar.width - 20
-        height: content.height * 1.2
+        //        height: content.height * 1.2
         anchors.horizontalCenter: parent.horizontalCenter
-        imagePath: "widgets/background"
+        color: "red"
 
-        PlasmaComponents.Label {
-            anchors {
-                top: parent.top
-                left: parent.left
-                margins: 20
+        content: Item {
+            height: childrenRect.height
+            width: parent.width
+            PlasmaComponents.Label {
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    margins: 20
+                }
+                text: i18nc("%1 = nick", "%1 writes", model.senderAlias)
             }
-            text: i18nc("%1 = nick", "%1 writes", model.user)
-        }
 
-        Column {
-            id: content
-            anchors {
-                left: parent.left
-                right: parent.right
-                margins: 20
-                verticalCenter: parent.verticalCenter
-            }
-            //spacing: 5
-//            Repeater {
-//                anchors {
-//                    left: parent.left
-//                    right: parent.right
-//                }
-//                model: 3
+            Column {
+                id: content
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: 20
+                    verticalCenter: parent.verticalCenter
+                }
+                //spacing: 5
+                //            Repeater {
+                //                anchors {
+                //                    left: parent.left
+                //                    right: parent.right
+                //                }
+                //                model: 3
                 Item {
                     id: msg
-                    height: childrenRect.height * 1.1
+                    height: childrenRect.height
                     anchors {
                         left: parent.left
                         right: parent.right
@@ -97,7 +104,7 @@ Item {
                         text: model.text
                     }
                 }
-//            }
+            }
         }
     }
 }
