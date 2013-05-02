@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=KTp
 Name[cs]=KTp
+Name[da]=KTp
 Name[de]=KTp
 Name[fr]=KTp
 Name[it]=KTp
@@ -15,6 +16,7 @@ Name[uk]=KTp
 Name[x-test]=xxKTpxx
 GenericName=KDE Telepathy
 GenericName[cs]=KDE Telepathy
+GenericName[da]=KDE Telepathy
 GenericName[de]=KDE Telepathy
 GenericName[fr]=Telepathy pour KDE
 GenericName[it]=Telepathy KDE
@@ -29,6 +31,7 @@ GenericName[uk]=KDE Telepathy
 GenericName[x-test]=xxKDE Telepathyxx
 Comment=Instant Messenger for Plasma Active
 Comment[cs]=Komunikátor pro Plasma Active
+Comment[da]=Instant messaging til Plasma Active
 Comment[fr]=Messagerie instantanée pour Plasma Active
 Comment[it]=Messaggistica istantanea per Plasma Active
 Comment[mr]=प्लाज्मा एक्टिव्ह करिता त्वरित संदेशवाहक
