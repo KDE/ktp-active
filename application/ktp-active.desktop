@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=KTp
+Name[bs]=KTp
 Name[cs]=KTp
 Name[da]=KTp
 Name[de]=KTp
@@ -17,6 +18,7 @@ Name[tr]=KTp
 Name[uk]=KTp
 Name[x-test]=xxKTpxx
 GenericName=KDE Telepathy
+GenericName[bs]=KDE Telepathy
 GenericName[cs]=KDE Telepathy
 GenericName[da]=KDE Telepathy
 GenericName[de]=KDE Telepathy
