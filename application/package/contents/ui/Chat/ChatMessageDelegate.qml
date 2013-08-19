@@ -50,7 +50,7 @@ Item {
                 left: parent.left
                 margins: 20
             }
-            text: i18nc("%1 = nick", "%1 writes", model.user)
+            text: i18nc("%1 = nick", "%1 writes", model.senderAlias)
         }
 
         Column {
