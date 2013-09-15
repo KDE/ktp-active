@@ -2,6 +2,7 @@
 Comment=Touchscreen friendly Instant Messenger
 Comment[cs]=Komunikátor uzpůsobený pro dotykové obrazovky
 Comment[da]=Touchskærm-venlig instant messaging
+Comment[de]=Instant-Messenger für Touch-Geräte
 Comment[fr]=Messagerie instantanée conviviale pour les écrans tactiles
 Comment[hu]=Érintőképernyő-barát azonnali üzenetküldő
 Comment[mr]=टचस्क्रीन करिता त्वरित संदेशवाहक
@@ -20,6 +21,7 @@ Keywords=
 Name=Touch Instant Messenger
 Name[cs]=Dotykový Komunikátor
 Name[da]=Instant messenging touch
+Name[de]=Instant-Messenger für Touch-Geräte
 Name[fr]=Messagerie instantanée pour les écrans tactiles
 Name[hu]=Érintő azonnali üzenetküldő
 Name[mr]=टच त्वरित संदेशवाहक
