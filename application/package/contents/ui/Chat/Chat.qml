@@ -29,8 +29,10 @@ Item {
 
     Column {
         id: content
-        anchors.fill: parent
-        anchors.margins: 15
+        anchors {
+            fill: parent
+            margins: 15
+        }
         spacing: 10
         ChatToolbar {
             id: chatToolbar
@@ -48,8 +50,8 @@ Item {
                 contentHeight: list.height
                 Column {
                     id: list
-                    spacing: 4
                     width: parent.width
+                    spacing: 4
                     Repeater {
                         model: conversation.messages
                         delegate: ChatMessageDelegate {
@@ -79,7 +81,6 @@ Item {
             }
             PlasmaComponents.TextField {
                 id: textArea
-                focus: true
                 anchors {
                     top: parent.top
                     bottom: parent.bottom
@@ -87,10 +88,12 @@ Item {
                     right: parent.right
                     bottomMargin: 10
                 }
+                focus: true
+                onTextChanged: conversation.updateTextChanged(textArea.text)
                 onAccepted: {
-                    console.log("ASDFASDFASDF");
-                    conversation.messages.sendNewMessage(text);
-                    text = "";
+                    conversation.messages.sendNewMessage(textArea.text);
+                    textArea.text = "";
+                    conversation.updateTextChanged("");
                 }
             }
         }
