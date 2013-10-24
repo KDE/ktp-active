@@ -27,6 +27,9 @@ Item {
 
     property variant conversation: model.conversation
 
+    //hide all chats except the one set in activeChatIndex
+    visible: index == conversationsModel.activeChatIndex ? true : false
+
     Column {
         id: content
         anchors {
