@@ -23,7 +23,7 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.qtextracomponents 0.1 as PlasmaQt
 
 PlasmaComponents.ListItem {
-    id: signleEntry
+    id: singleEntry
     height: contactAvatar.height + 10
 
     signal contactClicked(variant account, variant contact)
@@ -45,7 +45,7 @@ PlasmaComponents.ListItem {
             id: contactAvatar
             width: theme.largeIconSize
             height: theme.largeIconSize
-            source: avatar ? avatar : "../../images/im-user.png"
+            source: avatar ? avatar[0] : "../../images/im-user.png"
             anchors.verticalCenter: parent.verticalCenter
             smooth: true
         }
