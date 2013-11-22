@@ -30,6 +30,12 @@ Item {
     //hide all chats except the one set in activeChatIndex
     visible: index == conversationsModel.activeChatIndex ? true : false
 
+    onVisibleChanged: {
+        if(chatRoot.visible) {
+            conversation.messages.acknowledgeAllMessages()
+        }
+    }
+
     Column {
         id: content
         anchors {
@@ -60,6 +66,11 @@ Item {
                         delegate: ChatMessageDelegate {
                             width: flickable.width
                             direction: true
+                            Component.onCompleted: {
+                                if(chatRoot.visible) {
+                                    conversation.messages.acknowledgeAllMessages()
+                                }
+                            }
                         }
                     }
                 }
