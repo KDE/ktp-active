@@ -35,20 +35,6 @@ Item {
             height: childrenRect.height
             anchors.verticalCenter: parent.verticalCenter
             PlasmaComponents.ToolButton {
-                id: audioCall
-                iconSource: "audio-headset"
-                text: "Audio call"
-                height: theme.mediumIconSize
-                enabled: false
-            }
-            PlasmaComponents.ToolButton {
-                id: videoCall
-                iconSource: "camera-web"
-                text: "Video call"
-                height: theme.mediumIconSize
-                enabled: false
-            }
-            PlasmaComponents.ToolButton {
                 id: logView
                 iconSource: "view-pim-journal"
                 text: "View logs"
