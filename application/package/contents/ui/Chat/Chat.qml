@@ -67,6 +67,7 @@ Item {
                             width: flickable.width
                             direction: true
                             Component.onCompleted: {
+                                flickable.contentY=flickable.contentHeight
                                 if(chatRoot.visible) {
                                     conversation.messages.acknowledgeAllMessages()
                                 }
