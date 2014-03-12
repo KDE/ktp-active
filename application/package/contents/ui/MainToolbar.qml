@@ -31,19 +31,19 @@ Item {
     property alias settingsChecked: settingsButton.checked
     property alias activeChatsChecked: notificationNewMessage.checked
 
-//    PlasmaComponents.ToolButton {
-//        id: settingsButton
-//        width: theme.mediumIconSize
-//        height: theme.mediumIconSize
-//        anchors.verticalCenter: parent.verticalCenter
-//        iconSource: "format-justify-fill"
-//        flat: false
-//        checkable: true
-//        checked: true
+   PlasmaComponents.ToolButton {
+       id: settingsButton
+       width: theme.mediumIconSize
+       height: theme.mediumIconSize
+       anchors.verticalCenter: parent.verticalCenter
+       iconSource: "format-justify-fill"
+       flat: false
+       checkable: true
+       checked: false
 
-//        Component.onCompleted:iconSource = "format-justify-fill"
-//        visible: false //hidden whilst none of the icons work
-//    }
+       Component.onCompleted:iconSource = "format-justify-fill"
+       visible: true
+   }
 
     StatusPicker {
         id: picker
