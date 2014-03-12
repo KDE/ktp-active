@@ -32,12 +32,9 @@ Image {
     fillMode: Image.Tile
     asynchronous: true
 
-    property alias minimumWidth: root.paintedWidth
-    property alias minimumHeight: root.paintedHeight
-
     // theme is available globally
     PlasmaCore.Theme {
-        id: theme        
+        id: theme
     }
 
     PlasmaComponents.ToolBar {

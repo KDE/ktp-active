@@ -107,23 +107,10 @@ Item {
         anchors.right: parent.right
         initialPage: content
 
-        PlasmaMobile.OverlayDrawer {
+        ChatContainer {
             id: content
             anchors.fill: parent
-            page: chat
-            drawer: activeChats
             visible: false
-
-            ChatContainer {
-                id: chat
-                anchors.fill: parent
-            }
-
-            ActiveChats {
-                id: activeChats
-                implicitWidth: rightContainer.width * 0.45
-                implicitHeight: rightContainer.height
-            }
         }
     }
 

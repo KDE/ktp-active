@@ -82,7 +82,7 @@ Item {
                             //left: parent.left
                             right: parent.right
                         }
-                        text: model.date
+                        //text: model.date       //TODO: disable for now. Needs a fix
                         color: "#666666"
                     }
                     PlasmaComponents.Label {
