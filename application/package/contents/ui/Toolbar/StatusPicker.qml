@@ -77,45 +77,65 @@ Item {
             id: statusTabbar
             anchors.fill: parent
             PlasmaComponents.TabButton {
+                id: statusOffline
+                iconSource: "user-offline"
+                text: "Offline"
+                onClicked: {
+                    presenceManager.setPresence(Ktp.PresenceManager.Offline)
+                    selectedTab = 0
+                    picker.state = "presentationMode"
+                }
+            }
+            PlasmaComponents.TabButton {
                 id: statusOnline
                 iconSource: "user-online";
                 text: "Online"
                 onClicked: {
                     presenceManager.setPresence(Ktp.PresenceManager.Online)
-                    selectedTab = 0
+                    selectedTab = 1
                     picker.state = "presentationMode"
                     PlasmaExtras.ReleasedAnimation
+                }
+            }
+            PlasmaComponents.TabButton {
+                id: statusBusy
+                iconSource: "user-busy"
+                text: "Busy"
+                onClicked: {
+                    presenceManager.setPresence(Ktp.PresenceManager.Busy)
+                    selectedTab = 2
+                    picker.state = "presentationMode"
                 }
             }
             PlasmaComponents.TabButton {
                 id: statusAway
                 iconSource: "user-away"
                 text: "Away"
-                onClicked: { presenceManager.setPresence(Ktp.PresenceManager.Away); selectedTab = 1; picker.state = "presentationMode"; }
+                onClicked: {
+                    presenceManager.setPresence(Ktp.PresenceManager.Away)
+                    selectedTab = 3
+                    picker.state = "presentationMode"
+                }
             }
             PlasmaComponents.TabButton {
                 id: statusAwayExtended
                 iconSource: "user-away-extended"
                 text: "Not Available"
-                onClicked: { presenceManager.setPresence(Ktp.PresenceManager.ExtendedAway); selectedTab = 2; picker.state = "presentationMode"; }
-            }
-            PlasmaComponents.TabButton {
-                id: statusBusy
-                iconSource: "user-busy"
-                text: "Busy"
-                onClicked: { presenceManager.setPresence(Ktp.PresenceManager.Busy); selectedTab = 3; picker.state = "presentationMode"; }
+                onClicked: {
+                    presenceManager.setPresence(Ktp.PresenceManager.ExtendedAway)
+                    selectedTab = 4
+                    picker.state = "presentationMode"
+                }
             }
             PlasmaComponents.TabButton {
                 id: statusHidden
                 iconSource: "user-invisible"
                 text: "Invisible"
-                onClicked: { presenceManager.setPresence(Ktp.PresenceManager.Hidden); selectedTab = 4; picker.state = "presentationMode"; }
-            }
-            PlasmaComponents.TabButton {
-                id: statusOffline
-                iconSource: "user-offline"
-                text: "Offline"
-                onClicked: { presenceManager.setPresence(Ktp.PresenceManager.Offline); selectedTab = 5; picker.state = "presentationMode"; }
+                onClicked: {
+                    presenceManager.setPresence(Ktp.PresenceManager.Hidden)
+                    selectedTab = 5
+                    picker.state = "presentationMode"
+                }
             }
         }
 
@@ -154,7 +174,7 @@ Item {
             },
             Transition {
                 from: "statusSelect";
-                NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 1000  }
+                NumberAnimation { properties: "opacity"; easing.type: Easing.InOutQuad; duration: 500  }
             }
         ]
     }
@@ -237,7 +257,7 @@ Item {
         State {
             name: "selectionMode"
             PropertyChanges { target: statusField;      state: "statusSelect" }
-            PropertyChanges { target: optionsField;     state: "messageUse" }
+            PropertyChanges { target: optionsField;     state: "messageAccept" }
         },
         State {
             name: "editMode"
