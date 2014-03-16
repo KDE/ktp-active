@@ -23,9 +23,9 @@ import org.kde.plasma.extras 0.1 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.1 as PlasmaMobile
 import org.kde.telepathy 0.1 as KTp
 
-import "Sidebar"
-import "Chat"
+import "Chats"
 import "Contacts"
+import "Toolbars"
 
 Item {
     id: mainView

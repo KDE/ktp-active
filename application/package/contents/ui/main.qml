@@ -45,7 +45,7 @@ Image {
 
         Loader {
             id: toolbarContent
-            source: "MainToolbar.qml"
+            source: "Toolbars/MainToolbar.qml"
         }
 
         Connections {
