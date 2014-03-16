@@ -99,7 +99,7 @@ Item {
         }
     }
 
-    // Right container contains your chat and a active chats drawer
+    // Right container contains chat contents
     PlasmaComponents.PageStack {
         id: rightContainer
         width: parent.width - leftContainer.width
