@@ -32,7 +32,9 @@ Item {
 
     onVisibleChanged: {
         if(chatRoot.visible) {
-            conversation.messages.acknowledgeAllMessages()
+            conversation.messages.visibleToUser=true
+        } else {
+            conversation.messages.visibleToUser=false
         }
     }
 
@@ -69,7 +71,9 @@ Item {
                             Component.onCompleted: {
                                 flickable.contentY=flickable.contentHeight
                                 if(chatRoot.visible) {
-                                    conversation.messages.acknowledgeAllMessages()
+                                    conversation.messages.visibleToUser=true
+                                } else {
+                                    conversation.messages.visibleToUser=false
                                 }
                             }
                         }
